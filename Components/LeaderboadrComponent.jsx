@@ -73,7 +73,7 @@ export default function LeaderboadrComponent() {
         });
       }
     }, 500);
-  }, [isloading])
+  }, [leaderboard])
   if (isloading == true) {
     return (
       <div className="loading-container">
