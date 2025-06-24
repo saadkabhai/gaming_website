@@ -10,7 +10,7 @@ import { WebsiteURL } from '../BASEURL';
 export default function ChessComponent() {
     const game = useRef(new Chess());
     const [board, setBoard] = useState(game.current.board())
-    const { setshouldfetchPoints } = useAuth()
+    const { setPointsToAdd } = useAuth()
     const [draggedPiece, setdraggedPiece] = useState(null)
     const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
     const [PieceSize, setPieceSize] = useState(null)
@@ -60,21 +60,13 @@ export default function ChessComponent() {
         if (game.current.isGameOver()) {
             setGameOver(true)
             const winner = game.current.turn == 'w' ? 'Black' : 'White';
+            result_container.classList.add('active')
+            body.style.overflow = 'hidden'
             if (game.current.isCheckmate() || game.current.isDraw() || game.current.isStalemate()) {
                 if (winner == 'White') {
-                    await fetch(`${WebsiteURL}/api/addPoints`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            username: secureStorage.get('Username'),
-                            Points: 500
-                        })
-                    });
                     result_container.classList.add('active')
                     body.style.overflow = 'hidden'
-                    setshouldfetchPoints(true)
+                    setPointsToAdd(500)
                     setresult('You Won')
                     setGems(500)
                 } else {
@@ -84,19 +76,7 @@ export default function ChessComponent() {
                     setGems(0)
                 }
             } else if (game.current.isInsufficientMaterial() || game.current.isThreefoldRepetition()) {
-                await fetch(`${WebsiteURL}/api/addPoints`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: secureStorage.get('Username'),
-                        Points: 250
-                    })
-                });
-                result_container.classList.add('active')
-                body.style.overflow = 'hidden'
-                setshouldfetchPoints(true)
+                setPointsToAdd(250)
                 setresult('Draw')
                 setGems(250)
             }

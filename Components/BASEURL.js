@@ -8,5 +8,6 @@ const BASEURL = [
 
 const ServerURL = BASEURL[Math.floor(Math.random() * BASEURL.length)];
 const WebsiteURL = 'https://play2win.vercel.app';
+// const WebsiteURL = 'http://localhost:3000';
 
 export { ServerURL, WebsiteURL };

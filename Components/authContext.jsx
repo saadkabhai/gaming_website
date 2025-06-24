@@ -5,10 +5,10 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [shouldfetchPoints, setshouldfetchPoints] = useState(false);
+  const [PointsToAdd, setPointsToAdd] = useState(0);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, shouldfetchPoints, setshouldfetchPoints }}>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, PointsToAdd, setPointsToAdd }}>
       {children}
     </AuthContext.Provider>
   );

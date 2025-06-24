@@ -7,7 +7,7 @@ import { useAuth } from '../authContext'
 import { WebsiteURL } from '../BASEURL'
 export default function TictactoeComponent() {
     const [gameState, setgameState] = useState(['', '', '', '', '', '', '', '', ''])
-    const { setshouldfetchPoints } = useAuth()
+    const { setPointsToAdd } = useAuth()
     const [gameActive, setgameActive] = useState(true)
     const [currentPlayer, setcurrentPlayer] = useState('X')
     const [firstplayerturn, setfirstplayerturn] = useState('X')
@@ -57,21 +57,11 @@ export default function TictactoeComponent() {
                     const result_container = document.querySelector('.result-container'),
                         body = document.querySelector('body')
                     if (player == 'X') {
-                        setresult('You Won')
-                        await fetch(`${WebsiteURL}/api/addPoints`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                username: secureStorage.get('Username'),
-                                Points: 250
-                            })
-                        });
                         result_container.classList.add('active')
                         body.style.overflow = 'hidden'
+                        setresult('You Won')
+                        setPointsToAdd(250)
                         setGems(250)
-                        setshouldfetchPoints(true)
                     } else {
                         setresult('You Lose')
                         setGems(0)

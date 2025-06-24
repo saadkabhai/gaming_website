@@ -7,8 +7,7 @@ import { useAuth } from './authContext'
 import secureStorage from './secureStorage'
 import { WebsiteURL } from './BASEURL'
 export default function NavbarComponent() {
-    const { isLoggedIn, setIsLoggedIn } = useAuth(),
-        { shouldfetchPoints, setshouldfetchPoints } = useAuth(),
+    const { isLoggedIn, setIsLoggedIn, PointsToAdd, setPointsToAdd } = useAuth(),
         [isloaggedIn, setisloaggedIn] = useState(false),
         [Username, setUsername] = useState(),
         [Email, setEmail] = useState(),
@@ -118,6 +117,19 @@ export default function NavbarComponent() {
             }
         }, 500);
     }
+    const addPoints = async (Points) => {
+        await fetch(`${WebsiteURL}/api/addPoints`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: secureStorage.get('Username'),
+                Points: 500
+            })
+        });
+        fetchPoints()
+    }
     useEffect(() => {
         const Gems = document.querySelector('.User-panel .Gems')
         if (Gems) {
@@ -138,13 +150,13 @@ export default function NavbarComponent() {
         }
     }, [isLoggedIn])
     useMemo(() => {
-        if (shouldfetchPoints) {
-            fetchPoints()
+        if (PointsToAdd > 0) {
+            addPoints(PointsToAdd)
             setTimeout(() => {
-                setshouldfetchPoints(false)
+                setPointsToAdd(0)
             }, 500);
         }
-    }, [shouldfetchPoints])
+    }, [PointsToAdd])
     return (
         <div className="navbar-container">
             <div className='navbar'>
