@@ -10,7 +10,6 @@ export default function TictactoeComponent() {
     const { setPointsToAdd } = useAuth()
     const [gameActive, setgameActive] = useState(true)
     const [currentPlayer, setcurrentPlayer] = useState('X')
-    const [firstplayerturn, setfirstplayerturn] = useState('X')
     const [result, setresult] = useState(null)
     const [Gems, setGems] = useState(null)
     const winningCombos = [
@@ -120,14 +119,12 @@ export default function TictactoeComponent() {
             setTimeout(() => {
                 setgameState(['', '', '', '', '', '', '', '', '']);
                 cells.forEach(cell => cell.innerHTML = '');
-                if (firstplayerturn == 'X') {
+                if (currentPlayer == 'X') {
                     setcurrentPlayer('O')
-                    setfirstplayerturn('O')
                     setTimeout(() => {
                         computerMove(['', '', '', '', '', '', '', '', ''], true)
                     }, 500);
                 } else {
-                    setfirstplayerturn('X')
                     setcurrentPlayer('X')
                 }
             }, 600);
