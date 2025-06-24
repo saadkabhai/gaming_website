@@ -56,9 +56,9 @@ export default function TictactoeComponent() {
                 setTimeout(async () => {
                     const result_container = document.querySelector('.result-container'),
                         body = document.querySelector('body')
-                    if (player == 'X') {
                         result_container.classList.add('active')
                         body.style.overflow = 'hidden'
+                    if (player == 'X') {
                         setresult('You Won')
                         setPointsToAdd(250)
                         setGems(250)
