@@ -61,7 +61,7 @@ export default function HelpComponent() {
             Question_text.style.top = '10px'
             Question_text.style.transform = 'translateY(0%)';
             Answer_text.style.opacity = 1
-            Answer_text.style.top = `${QuestionContainerCloseHeight[index].height + 20}px`
+            Answer_text.style.top = `${QuestionContainerCloseHeight[index].height + 0}px`
             Answer_text.style.transform = 'translateY(0%)';
             e.target.style.height = QuestionContainerOpenHeight[index].height - 10 + 'px'
             setTimeout(() => {
