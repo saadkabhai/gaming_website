@@ -1,0 +1,85 @@
+.Help-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(100vh - 70px);
+}
+
+.Help-container .Heading {
+    padding-top: 20px;
+}
+
+.Help-container .Questions {
+    width: 90vw;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    opacity: 0;
+    flex-direction: column;
+    gap: 20px;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Help-container .Questions.show {
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+.Help-container .Questions .Question-container {
+    width: 100%;
+    background-color: #fff6d9;
+    border: 2px solid #dadddc;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.Help-container .Questions .Question-container .QNA{
+    width: 100%;
+}
+.Help-container .Questions .Question-container .QNA,
+.Help-container .Questions .Question-container .Arrow {
+    pointer-events: none;
+}
+
+.Help-container .Questions .Question-container .QNA .Question {
+    top: 50%;
+    width: 90%;
+}
+
+.Help-container .Questions .Question-container.hide-answer .QNA .Question {
+    width: calc(90% - 36px);
+    position: absolute;
+    transform: translateY(-50%);
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Help-container .Questions .Question-container .QNA .Answer {
+    top: 50%;
+    width: 90%;
+}
+
+.Help-container .Questions .Question-container.hide-answer .QNA .Answer {
+    transform: translateY(-50%);
+    position: absolute;
+    opacity: 0;
+    width: calc(90% - 36px);
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Help-container .Questions .Question-container .Arrow {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.Help-container .Questions .Question-container.active .Arrow {
+    transform: rotate(180deg);
+}

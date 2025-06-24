@@ -1,0 +1,37 @@
+.layered-button {
+    position: relative;
+    transition: 0.2s ease-in-out;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layered-button.disabled {
+    pointer-events: none;
+}
+
+.layered-button:active {
+    top: 10px;
+    left: 5px;
+    outline: none;
+}
+
+.layered-button:active::after {
+    top: 0px;
+    left: 0px;
+}
+
+.layered-button::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--shadow-color, #fff);
+    left: 5px;
+    border-radius: 5px;
+    z-index: -1;
+    transition: 0.2s ease-in-out;
+}

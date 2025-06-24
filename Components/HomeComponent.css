@@ -1,0 +1,156 @@
+.HomePageContainer {
+    padding: 0px 10vw;
+    min-height: calc(100vh - 70px);
+}
+
+.HomePageContainer .section-one {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+.HomePageContainer .section-one .Landing-Heading {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+}
+.HomePageContainer .section-one a{
+    width: 157px;
+    display: flex;
+}
+.HomePageContainer .section-one button {
+    background-color: #002738;
+    color: #ffe0ad;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.HomePageContainer .main-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.HomePageContainer .main-section .Featured-Games-container {
+    padding-top: 100px;
+    width: 60%;
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Featured-Games-Heading {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games .Game {
+    flex: 1;
+    background-color: #002738;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: calc(50% - 10px);
+    min-width: calc(50% - 10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games .Game.active {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games .Game:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-5px);
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games .sec-one {
+    display: flex;
+    gap: 10px;
+
+}
+
+.HomePageContainer .main-section .Featured-Games-container .Games .Game .name {
+    color: #ffe0ad;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.HomePageContainer .main-section .Top-3-players {
+    width: 30%;
+    padding-top: 50px;
+}
+
+.HomePageContainer .main-section .Top-3-players .container {
+    background-color: #002738;
+    color: #ffe0ad;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.HomePageContainer .main-section .Top-3-players .container.active{
+    transform: translateY(0px);
+    opacity: 1;
+}
+.HomePageContainer .main-section .Top-3-players .container .Heading {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.HomePageContainer .main-section .Top-3-players .container .players {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.HomePageContainer .main-section .Top-3-players .container .players .player {
+    display: flex;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.HomePageContainer .main-section .Top-3-players .container .players .player .name{
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+}
+@media (max-width:840px) {
+    .HomePageContainer {
+        padding: 5px 10px;
+    }
+
+}
+
+@media (max-width:990px) {
+    .HomePageContainer .main-section .Top-3-players {
+        display: none;
+    }
+
+    .HomePageContainer .main-section .Featured-Games-container {
+        width: 100%;
+    }
+}

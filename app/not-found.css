@@ -1,0 +1,36 @@
+.not-found-error-container {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 700;
+}
+
+.not-found-error-container .error-number {
+    font-size: 80px;
+    letter-spacing: 5px;
+}
+
+.not-found-error-container .error-text{
+    font-size: 30px;
+    margin-top: -30px;
+    margin-bottom: -20px;
+    text-align: center;
+}
+
+.not-found-error-container .image{
+    max-width: 300px;
+    width: 90vw;
+    margin-top: -10px;
+}
+.not-found-error-container .button button{
+    background-color: #24282d;
+    color: #ffe0ad;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

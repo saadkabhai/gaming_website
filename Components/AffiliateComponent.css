@@ -1,0 +1,117 @@
+.affiliate-container {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.affiliate-container .info {
+    border-radius: 10px;
+    border: 1px solid #fffaf2;
+    background: linear-gradient(90deg, #ffe0ad, #ffcc70);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    padding: 20px 20px;
+    max-width: 400px;
+    width: 90vw;
+}
+
+.affiliate-container .info .code-container {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.affiliate-container .info .code-container .code {
+    background-color: #fffced;
+    border: 1px solid #cdd7e7;
+    border-radius: 10px;
+    padding: 10px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.affiliate-container .info .code-container button {
+    padding: 10px 20px;
+    border: 1px solid #fefefc;
+    background-color: #f1b91a;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.affiliate-container .info .code-container button:hover {
+    background-color: #c19315;
+}
+
+.affiliate-container .info .note {
+    margin: 10px 0px;
+}
+
+.affiliate-container .info .Referrals-conatiner .ref-heading {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals {
+    border: 1px solid #dadddc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .not-found {
+    background-color: #fff6d9;
+    text-align: center;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff6d9;
+    padding: 10px 5px;
+    border-bottom: 1px solid #dadddc;
+    width: 100%;
+    gap: 5px;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral:nth-last-child(1) {
+    border: none;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral .first-sec {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: calc(75% - 5px);
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral .first-sec .Profile-avatar {
+    aspect-ratio: 1/1;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 20px;
+    color: #fff6d9;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral .first-sec .name {
+    font-weight: 600;
+    font-size: 18px;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+}
+
+.affiliate-container .info .Referrals-conatiner .Referrals .referral .second-sec .date {
+    white-space: nowrap;
+}

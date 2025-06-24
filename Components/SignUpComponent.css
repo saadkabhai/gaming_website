@@ -1,0 +1,90 @@
+.user-form-container {
+    display: flex;
+    min-height: calc(100vh - 70px);
+    justify-content: center;
+    align-items: center;
+}
+
+.user-form-container .form {
+    max-width: 300px;
+    width: 90vw;
+}
+
+.user-form-container .form .logo {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.user-form-container .form .logo img {
+    width: 50%;
+}
+
+.user-form-container .form .inputs .input {
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+    background-color: #ffd421;
+    padding: 10px 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #24282d;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+.user-form-container .form .inputs .input .icon i {
+    font-size: 20px;
+}
+
+.user-form-container .form .inputs .input input {
+    width: 100%;
+    padding-left: 10px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    font-weight: 700;
+}
+
+.user-form-container .form .inputs .input input::placeholder {
+    color: #24282d !important;
+    font-weight: 700;
+}
+
+.user-form-container .form .inputs .input .show-password {
+    font-weight: 700;
+    font-size: 18px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.user-form-container .form .button button {
+    width: 90%;
+    margin-left: 5%;
+    background-color: #24282d;
+    border-radius: 5px;
+    color: #ffe0ad;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.user-form-container .form .link {
+    display: flex;
+    justify-content: center;
+    color: #24282d;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 10px;
+cursor: pointer;    
+}
+
+.user-form-container .form .link p:hover {
+    text-decoration: underline;
+}
