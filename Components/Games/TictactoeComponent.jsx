@@ -33,7 +33,7 @@ export default function TictactoeComponent() {
         const img = document.createElement('img');
         img.style.transition = '0.5s cubic-bezier(0.4, 0, 0.2, 1)';
         img.style.transform = 'scale(0)';
-        img.src = `/Cross.png`;
+        img.src = `/cross.png`;
         e.target.appendChild(img);
         setTimeout(() => {
             img.style.transform = 'scale(1)';
