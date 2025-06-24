@@ -9,11 +9,17 @@ export default function LeaderboadrComponent() {
     [isloading, setisloading] = useState(true),
     [Username, setUsername] = useState()
   function formatToShortNumber(num) {
-    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, '') + 'B';
-    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
-    if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, '') + 'K';
+    const truncate = (n, digits) => {
+      const factor = 10 ** digits;
+      return Math.floor(n * factor) / factor;
+    };
+
+    if (num >= 1_000_000_000) return truncate(num / 1_000_000_000, 1).toString().replace(/\.0$/, '') + 'B';
+    if (num >= 1_000_000) return truncate(num / 1_000_000, 1).toString().replace(/\.0$/, '') + 'M';
+    if (num >= 1_000) return truncate(num / 1_000, 1).toString().replace(/\.0$/, '') + 'K';
     return num.toString();
   }
+
   const isSingleLine = (element) => {
     const style = window.getComputedStyle(element);
     const lineHeight = parseFloat(style.lineHeight);
