@@ -13,6 +13,23 @@ export default function OTPComponent() {
         const error_container = document.querySelector('.error')
         error_container.classList.remove('active')
     }
+    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const fetchWithRetry = async (url, options, delay = 1000) => {
+        while (true) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status >= 500) {
+                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
+                } else {
+                    return await response.json();
+                }
+            } catch (err) {
+                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
+            }
+            await wait(delay);
+        }
+    };
     const sendOTPrequest = async () => {
         setbuttonisloading(true)
         const otp = document.getElementById('otp'),
@@ -32,7 +49,7 @@ export default function OTPComponent() {
             should_request = false
         }
         if (should_request) {
-            const response = await fetch(`${ServerURL}/OTP`, {
+            const res = await fetchWithRetry(`${ServerURL}/OTP`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -43,7 +60,6 @@ export default function OTPComponent() {
                     Code: otp.value
                 })
             })
-            const res = await response.json()
             if (res.message == 'Invalid Code.') {
                 error_container.classList.add('active')
                 error_text.innerHTML = '<b>Hey</b>, The code you entered is invalid. Please check and try again.'

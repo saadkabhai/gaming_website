@@ -15,6 +15,23 @@ export default function SignUpComponent() {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()._+=-])[A-Za-z\d!@#$%^&*()._+=-]{8,}$/;
         return regex.test(password);
     };
+    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const fetchWithRetry = async (url, options, delay = 1000) => {
+        while (true) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status >= 500) {
+                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
+                } else {
+                    return await response.json();
+                }
+            } catch (err) {
+                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
+            }
+            await wait(delay);
+        }
+    };
     const sendpasswordchangerequest = async () => {
         setbuttonisloading(true)
         const password = document.getElementById('newpassword'),
@@ -43,7 +60,7 @@ export default function SignUpComponent() {
             should_request = false
         }
         if (should_request == true) {
-            const response = await fetch(`${ServerURL}/ChangePassword`, {
+            const res = await fetchWithRetry(`${ServerURL}/ChangePassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,7 +71,6 @@ export default function SignUpComponent() {
                     Password: EncryptText.set(password.value)
                 })
             })
-            const res = await response.json()
             if (res.message == 'A new OTP has been sent because the previous one expired.') {
                 error_container.classList.add('active')
                 error_text.innerHTML = `<b>Hey</b>, We've sent a new OTP to <b>${res.Email}</b>. Check your inbox and Spam folder. The previous code has expired.`

@@ -21,6 +21,23 @@ export default function LoginComponent() {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()._+=-])[A-Za-z\d!@#$%^&*()._+=-]{8,}$/;
         return regex.test(password);
     };
+    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const fetchWithRetry = async (url, options, delay = 1000) => {
+        while (true) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status >= 500) {
+                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
+                } else {
+                    return await response.json();
+                }
+            } catch (err) {
+                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
+            }
+            await wait(delay);
+        }
+    };
     const sendloginrequest = async () => {
         setbuttonisloading(true)
         const Email = document.getElementById('Email'),
@@ -44,7 +61,7 @@ export default function LoginComponent() {
             should_request = false
         }
         if (should_request == true) {
-            const response = await fetch(`${ServerURL}/Login`, {
+            const res = await fetchWithRetry(`${ServerURL}/Login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,7 +71,6 @@ export default function LoginComponent() {
                     Password: Password.value
                 })
             })
-            const res = await response.json()
             if (res.message == 'Code send') {
                 secureStorage.set('OTPmessage', `<b>Hey</b>, A verification code has been sent to <b>${Email.value}</b>. Enter it below to confirm your address.`)
                 secureStorage.set('Email', Email.value)

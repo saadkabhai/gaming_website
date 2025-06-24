@@ -21,7 +21,23 @@ export default function SignUpComponent() {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()._+=-])[A-Za-z\d!@#$%^&*()._+=-]{8,}$/;
         return regex.test(password);
     };
+    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+    const fetchWithRetry = async (url, options, delay = 1000) => {
+        while (true) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status >= 500) {
+                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
+                } else {
+                    return await response.json();
+                }
+            } catch (err) {
+                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
+            }
+            await wait(delay);
+        }
+    };
     const SendRegisterRequest = async () => {
         setbuttonisloading(true)
         const Email = document.getElementById('Email'),
@@ -51,7 +67,7 @@ export default function SignUpComponent() {
             should_request = false
         }
         if (should_request == true) {
-            const response = await fetch(`${ServerURL}/UserRegister`, {
+            const res = await fetchWithRetry(`${ServerURL}/UserRegister`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -63,7 +79,6 @@ export default function SignUpComponent() {
                     Ref: ref
                 })
             })
-            const res = await response.json()
             if (res.message == 'Username is already taken.') {
                 error_text.innerHTML = '<b>Hey</b>, Username is already taken.'
                 error_container.classList.add('active')
