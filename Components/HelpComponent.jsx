@@ -18,13 +18,13 @@ export default function HelpComponent() {
                 Question_text = Question.querySelector('.Question'),
                 Question_text_rect = Question_text.getBoundingClientRect()
             Closedimensions.push({
-                height: Question_text_rect.height
+                height: Question_text_rect.height + 20
             })
 
             Opendimensions.push({
                 height: Question_rect.height
             });
-            Question.style.height = Question_text_rect.height + 'px'
+            Question.style.height = Question_text_rect.height + 20 + 'px'
             Question.classList.add('hide-answer')
         })
         setQuestionContainerOpenHeight(Opendimensions);
