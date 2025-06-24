@@ -125,7 +125,7 @@ export default function NavbarComponent() {
             },
             body: JSON.stringify({
                 username: secureStorage.get('Username'),
-                Points: 500
+                Points: Points
             })
         });
         fetchPoints()
