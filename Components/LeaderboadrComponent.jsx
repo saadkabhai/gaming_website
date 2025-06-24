@@ -64,8 +64,13 @@ export default function LeaderboadrComponent() {
   }, [])
   useMemo(() => {
     setTimeout(() => {
-      if (Username) {
-        document.querySelector('.current-player')?.scrollIntoView({ behavior: 'smooth' });
+      const current_player_div = document.querySelector('.current-player')
+      if (Username && current_player_div) {
+        const distanceFromTop = current_player_div.getBoundingClientRect().top + window.pageYOffset - 85;
+        window.scrollTo({
+          top: distanceFromTop,
+          behavior: 'smooth'
+        });
       }
     }, 500);
   }, [isloading])
