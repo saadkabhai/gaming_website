@@ -66,9 +66,9 @@ export default function ChessComponent() {
                 if (winner == 'White') {
                     result_container.classList.add('active')
                     body.style.overflow = 'hidden'
-                    setPointsToAdd(500)
+                    setPointsToAdd(20)
                     setresult('You Won')
-                    setGems(500)
+                    setGems(20)
                 } else {
                     result_container.classList.add('active')
                     body.style.overflow = 'hidden'
@@ -76,9 +76,9 @@ export default function ChessComponent() {
                     setGems(0)
                 }
             } else if (game.current.isInsufficientMaterial() || game.current.isThreefoldRepetition()) {
-                setPointsToAdd(250)
+                setPointsToAdd(10)
                 setresult('Draw')
-                setGems(250)
+                setGems(10)
             }
         }
 

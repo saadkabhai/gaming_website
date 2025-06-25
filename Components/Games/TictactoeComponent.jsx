@@ -59,8 +59,8 @@ export default function TictactoeComponent() {
                     body.style.overflow = 'hidden'
                     if (player == 'X') {
                         setresult('You Won')
-                        setPointsToAdd(250)
-                        setGems(250)
+                        setPointsToAdd(5)
+                        setGems(5)
                     } else {
                         setresult('You Lose')
                         setGems(0)
