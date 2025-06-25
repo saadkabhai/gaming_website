@@ -43,11 +43,17 @@
   border-radius: 20px;
   transform: scale(0.7);
   transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 275px;
+  height: 100%;
 }
-.chess-game-container .result-container.active .result{
+
+.chess-game-container .result-container.active .result {
   transform: scale(1);
 
 }
+
 .chess-game-container .result-container .result .Win-lose {
   text-align: center;
   color: #ffe39a;
@@ -93,6 +99,7 @@
 .chess-game-container .result-container .result .buttons .button:hover {
   background-color: #cba85c;
 }
+
 .chess-container .chessboard {
   border: 2px solid #24282d;
   display: grid;

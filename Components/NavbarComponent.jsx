@@ -167,7 +167,10 @@ export default function NavbarComponent(data) {
     }, [isLoggedIn])
     useMemo(() => {
         if (PointsToAdd > 0) {
-            addPoints(PointsToAdd)
+            const status = CSRisloaggedIn == false ? data.Status == 'LoggedIn' : isloaggedIn
+            if (status) {
+                addPoints(PointsToAdd)
+            }
             setTimeout(() => {
                 setPointsToAdd(0)
             }, 500);

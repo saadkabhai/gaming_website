@@ -1,9 +1,10 @@
 'use client'
 import React, { useEffect} from 'react'
 import './AffiliateComponent.css'
+import { WebsiteURL } from './BASEURL';
 export default function AffiliateComponent(Data) {
   function copyText(e) {
-    const text = `http://localhost:3000/SignUp/${Data.Status == 'LoggedIn' ? Data.Username : 'None'}`;
+    const text = `${WebsiteURL}/SignUp/${Data.Status == 'LoggedIn' ? Data.Username : 'None'}`;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text)
         .then(() => {
@@ -85,7 +86,7 @@ export default function AffiliateComponent(Data) {
       <div className="Heading">Affiliate Dashbord</div>
       <div className="info">
         <div className="code-container">
-          <div className="code">http://localhost:3000/SignUp/{Data.Status == 'LoggedIn' ? Data.Username : 'None'}</div>
+          <div className="code">{WebsiteURL}/SignUp/{Data.Status == 'LoggedIn' ? Data.Username : 'None'}</div>
           <button onClick={(e) => copyText(e)}>Copy</button>
         </div>
         <div className="note">

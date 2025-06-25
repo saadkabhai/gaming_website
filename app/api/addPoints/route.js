@@ -23,6 +23,14 @@ export async function POST(request) {
         await connectDB();
         const user = await User.findOne({ Username: username });
         const CurrentPoints = user.Points
+        const invitedby = user.InvitedBy
+        if (invitedby) {
+            const InvitedByUser = await User.findOne({ Username: invitedby });
+            if (InvitedByUser) {
+                const InvitedByUserCurrentpoints = InvitedByUser.Points
+                await User.updateOne({ Username: invitedby }, { $set: { Points: InvitedByUserCurrentpoints + Points / 2 } })
+            }
+        }
         await User.updateOne({ Username: username }, { $set: { Points: CurrentPoints + Points } })
         return new Response(JSON.stringify({ User: user }), {
             status: 200,
