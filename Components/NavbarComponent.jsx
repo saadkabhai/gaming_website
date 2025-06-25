@@ -141,7 +141,7 @@ export default function NavbarComponent(data) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: secureStorage.get('Username'),
+                username: Username ? Username : data.Username,
                 Points: Points
             })
         });
