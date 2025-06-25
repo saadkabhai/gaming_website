@@ -25,7 +25,7 @@ export const metadata = {
 async function fetchPoints(Email) {
   const Pointsres = await fetch(`${WebsiteURL}/api/getPoints?Email=${Email}`),
     User = await Pointsres.json()
-    return User
+  return User
 }
 export default async function RootLayout({ children }) {
   const cookieStore = cookies();
@@ -73,7 +73,7 @@ export default async function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <NavbarComponent Status={status} Username={Username} Email={Email} Color={Color} Points={Points}/>
+          <NavbarComponent Status={status} Username={Username} Email={Email} Color={Color} Points={Points} />
           <main>
             {children}
           </main>

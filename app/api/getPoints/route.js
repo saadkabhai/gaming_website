@@ -6,5 +6,9 @@ export async function GET(request) {
     const Email = url.searchParams.get('Email');
     await connectDB();
     const user = await User.findOne({ Email: Email });
-    return Response.json({ Points: user.Points });
+    if (user) {
+        return Response.json({ Points: user.Points });
+    } else {
+        return Response.json({ Points: 0 });
+    }
 }
