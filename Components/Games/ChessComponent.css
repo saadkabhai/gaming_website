@@ -3,14 +3,16 @@
   justify-content: center;
   height: calc(100vh - 70px);
   padding: 0;
+  flex-direction: column;
   overflow: hidden;
 }
 
 .chess-container {
   flex: 1;
   display: flex;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
+  overflow: hidden;
 }
 
 .chess-game-container .result-container {
@@ -91,14 +93,13 @@
 .chess-game-container .result-container .result .buttons .button:hover {
   background-color: #cba85c;
 }
-
 .chess-container .chessboard {
   border: 2px solid #24282d;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   aspect-ratio: 1 / 1;
-  opacity: 0;
+  opacity: 1;
   gap: 0px;
   transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -109,7 +110,6 @@
   justify-content: center;
   align-items: center;
   touch-action: none;
-  /* Prevent scrolling on drag */
   cursor: grab;
   user-select: none;
   position: relative;

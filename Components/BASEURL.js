@@ -5,6 +5,9 @@ const BASEURL = [
   'https://capable-chrome-banjo.glitch.me',
   'https://materialistic-ginger-technician.glitch.me'
 ];
+// const BASEURL = [
+//   'http://localhost:5000'
+// ];
 
 const ServerURL = BASEURL[Math.floor(Math.random() * BASEURL.length)];
 const WebsiteURL = 'https://play2win.vercel.app';

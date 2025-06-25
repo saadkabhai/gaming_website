@@ -133,6 +133,8 @@ export default function ChessComponent() {
                     width = container?.clientWidth,
                     height = container?.clientHeight,
                     shortestvalue = height < width ? height : width
+                    console.log(shortestvalue);
+                    
                 board.style.opacity = 0
                 board.style.width = `${shortestvalue}px`
                 board.style.height = `${shortestvalue - 0.2}px`
@@ -176,6 +178,10 @@ export default function ChessComponent() {
                     </div>
                 </div>
             </div>
+            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30,fontWeight:700 }}>Chess</h1>
+            <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
+                Challenge your mind with a classic game of Chess. Play against friends or sharpen your strategy solo — no downloads or registration needed!
+            </p>
             <div className="chess-container">
                 <div className="chessboard" onClick={() => {
                     if (GameOver) {

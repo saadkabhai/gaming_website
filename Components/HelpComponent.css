@@ -15,7 +15,8 @@
     display: flex;
     justify-content: center;
     padding-top: 30px;
-    opacity: 0;
+    /* opacity: 0; */
+    opacity: 1;
     flex-direction: column;
     gap: 20px;
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -49,7 +50,8 @@
 }
 
 .Help-container .Questions .Question-container .QNA .Question {
-    top: 50%;
+    top: 25%;
+    position: absolute;
     width: 90%;
 }
 

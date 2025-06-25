@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavbarComponent from "@/Components/NavbarComponent";
 import { AuthProvider } from "@/Components/authContext";
+import { WebsiteURL } from "@/Components/BASEURL";
+import { cookies } from "next/headers";
+import EncryptText from "@/Components/encryptText";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,11 +19,21 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Loading...",
   icons: {
-    icon: "/favicon.ico", // You can also use PNG or other image formats
+    icon: "/favicon.ico",
   },
 };
-
-export default function RootLayout({ children }) {
+async function fetchPoints(Email) {
+  const Pointsres = await fetch(`${WebsiteURL}/api/getPoints?Email=${Email}`),
+    User = await Pointsres.json()
+    return User
+}
+export default async function RootLayout({ children }) {
+  const cookieStore = cookies();
+  const Username = EncryptText.get(cookieStore.get('Username')?.value || null);
+  const status = EncryptText.get(cookieStore.get('status')?.value || null);
+  const Email = EncryptText.get(cookieStore.get('Email')?.value || null);
+  const Color = EncryptText.get(cookieStore.get('Color')?.value || null);
+  const Points = await fetchPoints(Email)
   return (
     <AuthProvider>
       <html lang="en">
@@ -60,7 +73,7 @@ export default function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <NavbarComponent />
+          <NavbarComponent Status={status} Username={Username} Email={Email} Color={Color} Points={Points}/>
           <main>
             {children}
           </main>

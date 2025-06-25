@@ -1,14 +1,9 @@
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect} from 'react'
 import './AffiliateComponent.css'
-import secureStorage from './secureStorage';
-import { WebsiteURL } from './BASEURL';
-export default function AffiliateComponent() {
-  const [Username, setUsername] = useState(),
-    [isloading, setisloading] = useState(true),
-    [Refferrals, setRefferrals] = useState([])
+export default function AffiliateComponent(Data) {
   function copyText(e) {
-    const text = `http://localhost:3000/SignUp/${Username}`;
+    const text = `http://localhost:3000/SignUp/${Data.Status == 'LoggedIn' ? Data.Username : 'None'}`;
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text)
         .then(() => {
@@ -19,7 +14,7 @@ export default function AffiliateComponent() {
         })
         .catch(err => {
           console.error("Clipboard error:", err);
-          fallbackCopy(text); // fallback method
+          fallbackCopy(text);
         });
     } else {
       const status = fallbackCopy(text);
@@ -34,7 +29,7 @@ export default function AffiliateComponent() {
   function fallbackCopy(text) {
     const textarea = document.createElement("textarea");
     textarea.value = text;
-    textarea.style.position = "fixed"; // prevent scroll
+    textarea.style.position = "fixed";
     document.body.appendChild(textarea);
     textarea.focus();
     textarea.select();
@@ -82,36 +77,15 @@ export default function AffiliateComponent() {
     })
   }
   useEffect(() => {
-    setUsername(secureStorage.get('Username'))
-    const fetchrefferrals = async () => {
-      const Refferralsres = await fetch(`${WebsiteURL}/api/getrefferrals?Username=${secureStorage.get('Username')}`),
-        Refferrals = await Refferralsres.json()
-      setRefferrals(Refferrals.Reffrerrals)
-    }
-    fetchrefferrals()
-    setisloading(false)
+    adjustfontsize()
     window.addEventListener('resize', adjustfontsize);
   }, [])
-  useMemo(() => {
-    if (isloading == false) {
-      setTimeout(() => {
-        adjustfontsize()
-      }, 10);
-    }
-  }, [isloading, Refferrals])
-  if (isloading == true) {
-    return (
-      <div className="loading-container">
-        <div className="loader"></div>
-      </div>
-    )
-  }
   return (
     <div className='affiliate-container'>
       <div className="Heading">Affiliate Dashbord</div>
       <div className="info">
         <div className="code-container">
-          <div className="code">http://localhost:3000/SignUp/{Username}</div>
+          <div className="code">http://localhost:3000/SignUp/{Data.Status == 'LoggedIn' ? Data.Username : 'None'}</div>
           <button onClick={(e) => copyText(e)}>Copy</button>
         </div>
         <div className="note">
@@ -120,8 +94,8 @@ export default function AffiliateComponent() {
         <div className="Referrals-conatiner">
           <div className="ref-heading">Your Referrals</div>
           <div className="Referrals">
-            {Refferrals.length > 0 ? (
-              Refferrals.map((Refferral, index) => {
+            {Data.Refferrals.Reffrerrals.length > 0 ? (
+              Data.Refferrals.Reffrerrals.map((Refferral, index) => {
                 return (
                   < div className="referral" key={index}>
                     <div className="first-sec">

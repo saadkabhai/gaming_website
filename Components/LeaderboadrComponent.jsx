@@ -1,19 +1,12 @@
 'use client'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect } from 'react'
 import './LeaderboadrComponent.css'
-import { motion } from 'framer-motion';
-import secureStorage from './secureStorage';
-import { WebsiteURL } from './BASEURL';
-export default function LeaderboadrComponent() {
-  const [leaderboard, setleaderboard] = useState(),
-    [isloading, setisloading] = useState(true),
-    [Username, setUsername] = useState()
+export default function LeaderboadrComponent(Serverleaderboard) {
   function formatToShortNumber(num) {
     const truncate = (n, digits) => {
       const factor = 10 ** digits;
       return Math.floor(n * factor) / factor;
     };
-
     if (num >= 1_000_000_000) return truncate(num / 1_000_000_000, 1).toString().replace(/\.0$/, '') + 'B';
     if (num >= 1_000_000) return truncate(num / 1_000_000, 1).toString().replace(/\.0$/, '') + 'M';
     if (num >= 1_000) return truncate(num / 1_000, 1).toString().replace(/\.0$/, '') + 'K';
@@ -50,22 +43,11 @@ export default function LeaderboadrComponent() {
       autoResizeFont(player, name, 1, 30)
     })
   }
-  const fetchLeaderboard = async () => {
-    const Leaderboardres = await fetch(`${WebsiteURL}/api/getLeaderboard`),
-      Leaderboard = await Leaderboardres.json()
-    setleaderboard(Leaderboard.Leaderboard)
-  }
   useEffect(() => {
     adjustfontsize()
-    fetchLeaderboard()
-    setUsername(secureStorage.get('Username'))
-    setisloading(false)
-    window.addEventListener('resize', adjustfontsize);
-  }, [])
-  useMemo(() => {
     setTimeout(() => {
       const current_player_div = document.querySelector('.current-player')
-      if (Username && current_player_div) {
+      if (current_player_div) {
         const distanceFromTop = current_player_div.getBoundingClientRect().top + window.pageYOffset - 85;
         window.scrollTo({
           top: distanceFromTop,
@@ -73,29 +55,25 @@ export default function LeaderboadrComponent() {
         });
       }
     }, 500);
-  }, [leaderboard])
-  if (isloading == true) {
-    return (
-      <div className="loading-container">
-        <div className="loader"></div>
-      </div>
-    )
-  }
+    window.addEventListener('resize', adjustfontsize);
+  }, [])
   return (
     <div className='Leader-board-container'>
       <div className="Heading">Leaderboard</div>
       <div className="image"></div>
       <div className="players">
-        {leaderboard &&
-          leaderboard.map((user, index) => {
+        {Serverleaderboard.Leaderboard &&
+          Serverleaderboard.Leaderboard.map((user, index) => {
             return (
-              <motion.div key={index} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.7 }} transition={{ duration: 0.3 }} className={`player ${Username == user.Username && 'current-player'} `}>
+              // <motion.div key={index} whileInView={{ opacity: 1, scale: 1 }} initial={{ opacity: 0, scale: 0.7 }} transition={{ duration: 0.3 }} className={`player ${Username == user.Username && 'current-player'} `}>
+              <div key={index} className={`player ${Serverleaderboard.Status == 'LoggedIn' && user.Username == Serverleaderboard.Username && 'current-player'}`}>
                 <div className="first-sec">
                   <div className="Position">{index + 1}</div>
                   <div className="UserName">{user.Username}</div>
                 </div>
                 <div className="Points">{formatToShortNumber(user.Points)}</div>
-              </motion.div>
+              </div>
+              // {/* </motion.div> */ }
             )
           })}
       </div>

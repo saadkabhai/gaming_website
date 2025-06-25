@@ -4,7 +4,7 @@ import './HomeComponent.css'
 import ViewLink from './ViewLink'
 import LayeredButton from './LayeredButton'
 import { WebsiteURL } from './BASEURL'
-export default function HomeComponent() {
+export default function HomeComponent(ServerData) {
     const [top3players, settop3players] = useState()
     const isSingleLine = (element) => {
         const style = window.getComputedStyle(element);
@@ -35,18 +35,8 @@ export default function HomeComponent() {
             autoResizeFont(name, 1, 20)
         })
     }
-    const fetchtop3players = async () => {
-        const viewportWidth = window.innerWidth;
-        if (viewportWidth > 989) {
-            const Top3playersres = await fetch(`${WebsiteURL}/api/getTop3users`),
-                Top3players = await Top3playersres.json()
-            settop3players(Top3players.Top3)
-
-        }
-    }
     useEffect(() => {
         adjustfontsize()
-        fetchtop3players()
         window.addEventListener('resize', adjustfontsize);
     }, [])
     return (
@@ -66,7 +56,7 @@ export default function HomeComponent() {
                         <p>Featured Games</p>
                     </div>
                     <div className="Games">
-                        <ViewLink href={'/G/Chess'} className="Game" ref={(game) => {
+                        <ViewLink href={'/G/Chess'} className="Game active" ref={(game) => {
                             if (!game) return;
                             const observer = new IntersectionObserver(
                                 ([entry], obs) => {
@@ -83,7 +73,7 @@ export default function HomeComponent() {
                             <img src="/Homechess.png" alt="" />
                             <div className="name">Chess</div>
                         </ViewLink>
-                        <ViewLink href={'/G/Tic-Tac-Toe'} className="Game" ref={(game) => {
+                        <ViewLink href={'/G/Tic-Tac-Toe'} className="Game active" ref={(game) => {
                             if (!game) return;
                             const observer = new IntersectionObserver(
                                 ([entry], obs) => {
@@ -102,38 +92,34 @@ export default function HomeComponent() {
                         </ViewLink>
                     </div>
                 </div>
-                {top3players && (
-                    <div className="Top-3-players">
-                        <div className="container" ref={(container) => {
-                            if (!container) return;
-                            const observer = new IntersectionObserver(
-                                ([entry], obs) => {
-                                    if (entry.isIntersecting) {
-                                        container.classList.add('active');
-                                        obs.unobserve(container);
-                                    }
-                                },
-                                { threshold: 0.2 }
-                            );
+                <div className="Top-3-players">
+                    <div className="container active" ref={(container) => {
+                        if (!container) return;
+                        const observer = new IntersectionObserver(
+                            ([entry], obs) => {
+                                if (entry.isIntersecting) {
+                                    container.classList.add('active');
+                                    obs.unobserve(container);
+                                }
+                            },
+                            { threshold: 0.2 }
+                        );
 
-                            observer.observe(container);
-                        }}>
-                            <div className="Heading">Top {top3players.length} Players</div>
-                            <div className="players">
-                                {top3players.map((player, index) => {
-                                    return (
-                                        <div key={index} className="player">
-                                            <div className="number">{index + 1}.</div>
-                                            <div className="name">{player.Username}</div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                        observer.observe(container);
+                    }}>
+                        <div className="Heading">Top {ServerData.Top3players.length} Players</div>
+                        <div className="players">
+                            {ServerData.Top3players.map((player, index) => {
+                                return (
+                                    <div key={index} className="player">
+                                        <div className="number">{index + 1}.</div>
+                                        <div className="name">{player.Username}</div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
-
-                )
-                }
+                </div>
             </div>
         </div>
     )

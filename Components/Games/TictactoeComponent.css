@@ -97,10 +97,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
-    opacity: 0;
+    opacity: 1;
     position: relative;
     gap: 5px;
     margin-top: 10px;
+    width: 380px;
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

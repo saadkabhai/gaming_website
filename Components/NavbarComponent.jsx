@@ -6,13 +6,15 @@ import ViewLink from './ViewLink'
 import { useAuth } from './authContext'
 import secureStorage from './secureStorage'
 import { WebsiteURL } from './BASEURL'
-export default function NavbarComponent() {
+export default function NavbarComponent(data) {
     const { isLoggedIn, setIsLoggedIn, PointsToAdd, setPointsToAdd } = useAuth(),
         [isloaggedIn, setisloaggedIn] = useState(false),
+        [CSRisloaggedIn, setCSRisloaggedIn] = useState(false),
         [Username, setUsername] = useState(),
         [Email, setEmail] = useState(),
         [Color, setColor] = useState(),
         [Points, setPoints] = useState(),
+        [CSRPoints, setCSRPoints] = useState(false),
         pathname = usePathname(),
         router = useRouter()
     const menuopenclose = (e) => {
@@ -78,20 +80,32 @@ export default function NavbarComponent() {
     };
     const checkLogin = async () => {
         try {
-            const res = await fetch(`${WebsiteURL}/api/getcookie`),
-                loggedin = await res.json(),
-                navbar = document.querySelector('.navbar-container')
-            if (loggedin.Status == 'LoggedIn') {
-                const getUsername = secureStorage.get('Username'),
-                    getEmail = secureStorage.get('Email'),
-                    getColor = secureStorage.get('Color')
+            const response = await fetch(`${WebsiteURL}/api/getStatus`),
+                res = await response.json(),
+                Status = res.Status
+            if (Status == 'LoggedIn') {
+                const UsernameResponse = await fetch(`${WebsiteURL}/api/getUsername`),
+                    resUsername = await UsernameResponse.json(),
+                    EmailResponse = await fetch(`${WebsiteURL}/api/getEmail`),
+                    resEmail = await EmailResponse.json(),
+                    ColorResponse = await fetch(`${WebsiteURL}/api/getColor`),
+                    resColor = await ColorResponse.json(),
+                    getUsername = resUsername.Username,
+                    getEmail = resEmail.Email,
+                    getColor = resColor.Color
                 setUsername(getUsername)
                 setColor(getColor)
                 setEmail(getEmail)
                 setisloaggedIn(true);
                 fetchPoints()
+                if (document.startViewTransition) {
+                    document.startViewTransition(() => {
+                        router.push('/');
+                    });
+                } else {
+                    router.push('/');
+                }
             }
-            navbar.classList.add('active')
         } catch (err) {
             console.error('Failed to fetch login status:', err);
         }
@@ -100,6 +114,7 @@ export default function NavbarComponent() {
         const Pointsres = await fetch(`${WebsiteURL}/api/getPoints?Email=${secureStorage.get('Email')}`),
             User = await Pointsres.json()
         setPoints(User.Points)
+        setCSRPoints(true)
     }
     const logout = () => {
         const User_panel = document.querySelector('.User-panel-conatiner')
@@ -107,6 +122,8 @@ export default function NavbarComponent() {
         setTimeout(async () => {
             setIsLoggedIn(false)
             await fetch(`${WebsiteURL}/api/setcookie?status=None`);
+            router.refresh()
+            setCSRisloaggedIn(true)
             setisloaggedIn(false);
             if (document.startViewTransition) {
                 document.startViewTransition(() => {
@@ -136,7 +153,6 @@ export default function NavbarComponent() {
             autoResizeFont(Gems, 1, 20)
             window.addEventListener('resize', () => autoResizeFont(Gems, 1, 20));
         }
-        checkLogin()
     }, [])
     useMemo(() => {
         if (typeof window !== 'undefined') {
@@ -145,7 +161,7 @@ export default function NavbarComponent() {
     }, [pathname])
     useMemo(async () => {
         if (isLoggedIn) {
-            await fetch(`${WebsiteURL}/api/setcookie?status=LoggedIn`);
+            setCSRisloaggedIn(true)
             checkLogin()
         }
     }, [isLoggedIn])
@@ -198,22 +214,50 @@ export default function NavbarComponent() {
                             <div className="slash"></div>
                         </ViewLink>
                     </div>
-                    {!isloaggedIn ? (
+                    {CSRisloaggedIn == false ? (
+                        data.Status !== 'LoggedIn' ? (
+                            <div className="link">
+                                <ViewLink href="/SignUp">
+                                    <button className="join-now-button">Join Now</button>
+                                </ViewLink>
+                            </div>
+                        ) : (
+                            <div className="link">
+                                <button
+                                    style={{ backgroundColor: Color || data.Color }}
+                                    onClick={user_panel_open_close}
+                                    className="open-user-panel Profile-avatar"
+                                >
+                                    {(Username || data.Username)[0].toUpperCase()}
+                                </button>
+                            </div>
+                        )
+                    ) : !isloaggedIn ? (
                         <div className="link">
-                            <ViewLink href={'/SignUp'}>
-                                <button className='join-now-button'>Join Now</button>
+                            <ViewLink href="/SignUp">
+                                <button className="join-now-button">Join Now</button>
                             </ViewLink>
                         </div>
                     ) : (
                         <div className="link">
-                            <button style={{ backgroundColor: Color }} onClick={user_panel_open_close} className='open-user-panel Profile-avatar'>{Username[0].toUpperCase()}</button>
+                            <button
+                                style={{ backgroundColor: Color || data.Color }}
+                                onClick={user_panel_open_close}
+                                className="open-user-panel Profile-avatar"
+                            >
+                                {(Username || data.Username)[0].toUpperCase()}
+                            </button>
                         </div>
                     )}
                 </div>
                 <div className="mobile-navbar">
-                    {isloaggedIn && (
-                        <button style={{ backgroundColor: Color }} onClick={user_panel_open_close} className='open-user-panel Profile-avatar'>{Username[0].toUpperCase()}</button>
-                    )}
+                    {CSRisloaggedIn == false ? (
+                        data.Status == 'LoggedIn' ? (
+                            <button style={{ backgroundColor: Color ? Color : data.Color }} onClick={user_panel_open_close} className='open-user-panel Profile-avatar'>{Username ? Username[0].toUpperCase() : data.Username[0].toUpperCase()}</button>
+                        ) : ''
+                    ) : isloaggedIn ? (
+                        <button style={{ backgroundColor: Color ? Color : data.Color }} onClick={user_panel_open_close} className='open-user-panel Profile-avatar'>{Username ? Username[0].toUpperCase() : data.Username[0].toUpperCase()}</button>
+                    ) : ''}
                     <div className="menu-button">
                         <div onClick={menuopenclose} className="slash-container">
                             <div className="menu-slash slash-one"></div>
@@ -251,27 +295,35 @@ export default function NavbarComponent() {
                                 <p className='linktext'>Help</p>
                             </ViewLink>
                         </div>
-                        {!isloaggedIn && (
+                        {CSRisloaggedIn == false ? (
+                            data.Status !== 'LoggedIn' ? (
+                                <div className="link">
+                                    <ViewLink href={'/SignUp'}>
+                                        <button className='linktext'>Join Now</button>
+                                    </ViewLink>
+                                </div>
+                            ) : ''
+                        ) : !isloaggedIn ? (
                             <div className="link">
                                 <ViewLink href={'/SignUp'}>
                                     <button className='linktext'>Join Now</button>
                                 </ViewLink>
                             </div>
-                        )}
+                        ) : ''}
                     </div>
                 </div>
             </div>
-            {isloaggedIn && (
+            {isloaggedIn == true || data.Status == 'LoggedIn' ? (
                 <div className="close-user-panel User-panel-conatiner" onClick={user_panel_open_close}>
                     <div className="User-panel">
                         <div className="close-user-panel Cross">&#10006;</div>
-                        <div className="email">{Email}</div>
+                        <div className="email">{Email ? Email : data.Email}</div>
                         <div className="Gems">
                             <img src="/Gems.png" alt="" />
-                            <p className="score">{formatToShortNumber(Points)}</p>
+                            <p className="score">{formatToShortNumber(CSRPoints == false ? data.Points.Points : Points)}</p>
                         </div>
-                        <div style={{ backgroundColor: Color }} className="profile-avatar">{Username[0].toUpperCase()}</div>
-                        <div className="Username">Hi, {Username}</div>
+                        <div style={{ backgroundColor: Color ? Color : data.Color }} className="profile-avatar">{Username ? Username[0].toUpperCase() : data.Username[0].toUpperCase()}</div>
+                        <div className="Username">Hi, {Username ? Username : data.Username}</div>
                         <div className="buttons">
                             <button className='logout-button' onClick={logout}>Logout</button>
                             <ViewLink delay={500} href={'/Balance'} className='balance-button'>
@@ -280,7 +332,7 @@ export default function NavbarComponent() {
                         </div>
                     </div>
                 </div>
-            )}
+            ) : ''}
         </div>
     )
 }

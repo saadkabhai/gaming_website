@@ -89,18 +89,17 @@ export default function LoginComponent() {
                 error_container.classList.add('active')
 
             } else if (res.message == 'Successful.') {
-                setIsLoggedIn(true);
-                secureStorage.set('Username', res.Username)
                 secureStorage.set('Email', Email.value)
                 secureStorage.set('Color', res.Color)
-                await fetch(`${WebsiteURL}/api/setcookie?status=LoggedIn`);
-                if (document.startViewTransition) {
-                    document.startViewTransition(() => {
-                        router.push('/');
-                    });
-                } else {
-                    router.push('/');
-                }
+                const params = new URLSearchParams({
+                    status: 'LoggedIn',
+                    Username: res.Username,
+                    Email: Email.value,
+                    Color: res.Color
+                });
+                await fetch(`${WebsiteURL}/api/setcookie?${params.toString()}`);
+                setIsLoggedIn(true);
+                return
             }
         }
         setbuttonisloading(false)

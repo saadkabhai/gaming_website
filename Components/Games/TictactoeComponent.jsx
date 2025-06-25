@@ -55,8 +55,8 @@ export default function TictactoeComponent() {
                 setTimeout(async () => {
                     const result_container = document.querySelector('.result-container'),
                         body = document.querySelector('body')
-                        result_container.classList.add('active')
-                        body.style.overflow = 'hidden'
+                    result_container.classList.add('active')
+                    body.style.overflow = 'hidden'
                     if (player == 'X') {
                         setresult('You Won')
                         setPointsToAdd(250)
@@ -210,6 +210,10 @@ export default function TictactoeComponent() {
                     </div>
                 </div>
             </div>
+            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30,fontWeight:700 }}>Tic Tac Toe</h1>
+            <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
+                Enjoy a fun and classic game of Tic Tac Toe. Compete against a friend or test your skills solo — simple, fast, and no sign-up needed!
+            </p>
             <div className="tictactoe-board-container">
                 <div className="tictactoe-board">
                     <div className="lines-container">
