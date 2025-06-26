@@ -5,6 +5,7 @@ import { AuthProvider } from "@/Components/authContext";
 import { WebsiteURL } from "@/Components/BASEURL";
 import { cookies } from "next/headers";
 import EncryptText from "@/Components/encryptText";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,6 +71,12 @@ export default async function RootLayout({ children }) {
             href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"
           />
           <meta name="google-adsense-account" content="ca-pub-4969686146359420"></meta>
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4969686146359420"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
