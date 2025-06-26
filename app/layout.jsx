@@ -69,6 +69,7 @@ export default async function RootLayout({ children }) {
             rel="stylesheet"
             href="https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css"
           />
+          <meta name="google-adsense-account" content="ca-pub-4969686146359420"></meta>
         </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
