@@ -223,6 +223,12 @@ export default function NavbarComponent(data) {
                             <div className="slash"></div>
                         </ViewLink>
                     </div>
+                    <div className={`link ${pathname == '/ContactUs' ? 'active' : ''}`}>
+                        <ViewLink href={'/ContactUs'}>
+                            <p>Contact Us</p>
+                            <div className="slash"></div>
+                        </ViewLink>
+                    </div>
                     {CSRisloaggedIn == false ? (
                         data.Status !== 'LoggedIn' ? (
                             <div className="link">
@@ -306,7 +312,12 @@ export default function NavbarComponent(data) {
                         </div>
                         <div className={`link ${pathname == '/PrivacyPolicy' ? 'active' : ''}`} style={{marginBottom:5}}>
                             <ViewLink href={'/PrivacyPolicy'}>
-                                <p className='linktext'>PrivacyPolicy</p>
+                                <p className='linktext'>Privacy Policy</p>
+                            </ViewLink>
+                        </div>
+                        <div className={`link ${pathname == '/ContactUs' ? 'active' : ''}`} style={{marginBottom:5}}>
+                            <ViewLink href={'/PrivacyPolicy'}>
+                                <p className='linktext'>Contact Us</p>
                             </ViewLink>
                         </div>
                         {CSRisloaggedIn == false ? (
