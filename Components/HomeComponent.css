@@ -7,25 +7,31 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
-.HomePageContainer .section-one .Landing-Heading {
+.HomePageContainer .section-one .Landing-Heading h1{
     font-size: 40px;
     font-weight: 700;
     line-height: 50px;
 }
-.HomePageContainer .section-one a{
+.HomePageContainer .section-one .Landing-Heading p{
+    font-size: 20px;
+    width: 80%;
+    margin: 5px 0px;
+}
+.HomePageContainer .section-one a {
     width: 157px;
     display: flex;
 }
+
 .HomePageContainer .section-one button {
     background-color: #002738;
     color: #ffe0ad;
     font-size: 20px;
     font-weight: 700;
     margin-top: 10px;
-    padding: 5px 20px;
+    padding: 15px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -108,10 +114,12 @@
     transform: translateY(50px);
     transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.HomePageContainer .main-section .Top-3-players .container.active{
+
+.HomePageContainer .main-section .Top-3-players .container.active {
     transform: translateY(0px);
     opacity: 1;
 }
+
 .HomePageContainer .main-section .Top-3-players .container .Heading {
     font-size: 30px;
     font-weight: 700;
@@ -131,13 +139,15 @@
     font-size: 20px;
     font-weight: 700;
 }
-.HomePageContainer .main-section .Top-3-players .container .players .player .name{
+
+.HomePageContainer .main-section .Top-3-players .container .players .player .name {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
     align-items: center;
     display: flex;
 }
+
 @media (max-width:840px) {
     .HomePageContainer {
         padding: 5px 10px;

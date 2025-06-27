@@ -42,9 +42,11 @@ export default function HomeComponent(ServerData) {
     return (
         <div className='HomePageContainer'>
             <div className="section-one">
+                <div className="Heading">Welcome to Play2Win</div>
                 <div className="Landing-Heading">
                     <h1>Play Games</h1>
                     <h1>& Earn Money</h1>
+                    <p>Play2Win is a free gaming platform where players compete in skill-based games to earn points and real rewards. Our top 3 players every month win cash prizes!</p>
                     <ViewLink href={'/Help'}>
                         <LayeredButton shadow_color={'#fff'}>How to Earn</LayeredButton>
                     </ViewLink>
