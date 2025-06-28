@@ -43,6 +43,7 @@ export default function GamesComponent() {
   return (
     <div className='Games-container'>
       <div className="Heading">Games</div>
+      <div className="Heading" style={{fontSize:18}}>Welcome to Play2Win Games! Below are a selection of casual games designed to entertain and challenge your brain. Click on any game to start playing instantly.</div>
       <div className="Games">
         {/* <ViewLink href={'/G/Chess'} className="Game active" ref={(game) => {
           if (!game) return;
