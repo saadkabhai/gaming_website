@@ -44,7 +44,7 @@ export default function GamesComponent() {
     <div className='Games-container'>
       <div className="Heading">Games</div>
       <div className="Games">
-        <ViewLink href={'/G/Chess'} className="Game active" ref={(game) => {
+        {/* <ViewLink href={'/G/Chess'} className="Game active" ref={(game) => {
           if (!game) return;
           const observer = new IntersectionObserver(
             ([entry], obs) => {
@@ -62,7 +62,7 @@ export default function GamesComponent() {
             <img src="/Gameschess.png" alt="" />
           </div>
           <div className="name">Chess</div>
-        </ViewLink>
+        </ViewLink> */}
         <ViewLink href={'/G/Tic-Tac-Toe'} className="Game active" ref={(game) => {
           if (!game) return;
           const observer = new IntersectionObserver(
