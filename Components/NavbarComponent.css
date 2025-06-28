@@ -361,7 +361,7 @@
     }
 }
 
-@media (max-width:970px) {
+@media (max-width:1005px) {
     .navbar .links {
         display: none;
     }
