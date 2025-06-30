@@ -85,7 +85,7 @@ export default function SignUpComponent() {
             } else if (res.message == 'Email is already taken.') {
                 error_text.innerHTML = '<b>Hey</b>, Email is already taken.'
                 error_container.classList.add('active')
-            } else if (res.message = 'User registered') {
+            } else if (res.message == 'User registered') {
                 secureStorage.set('Username', Username.value)
                 secureStorage.set('Email', Email.value)
                 secureStorage.set('OTPmessage', `<b>Hey</b>, A code has been sent to <b>${Email.value}</b>. It expires in <b>10 minutes</b>. Check your inbox and spam folder.`)

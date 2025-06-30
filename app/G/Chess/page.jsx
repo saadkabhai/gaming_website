@@ -1,3 +1,4 @@
+import Head from '@/app/AdsenseMetaTags';
 import ChessComponent from '@/Components/Games/ChessComponent'
 import React from 'react'
 export const metadata = {
@@ -6,6 +7,7 @@ export const metadata = {
 export default function page() {
     return (
         <div>
+            <Head />
             <ChessComponent />
         </div>
     )

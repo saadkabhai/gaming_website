@@ -1,5 +1,6 @@
 import { WebsiteURL } from "@/Components/BASEURL";
 import HomeComponent from "@/Components/HomeComponent";
+import Head from "./AdsenseMetaTags";
 
 async function Top3Players() {
   const Top3playersres = await fetch(`${WebsiteURL}/api/getTop3users`),
@@ -12,8 +13,9 @@ export const metadata = {
 export default async function Home() {
   const getTop3Players = await Top3Players()
   return (
-    <div>
+    <>
+      <Head />
       <HomeComponent Top3players={getTop3Players} />
-    </div>
+    </>
   );
 }

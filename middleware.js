@@ -6,7 +6,7 @@ export async function middleware(request) {
     const cookieStore = cookies();
     const status = EncryptText.get(cookieStore.get('status')?.value || null);
     if (status !== 'LoggedIn') {
-        if (request.nextUrl.pathname.startsWith('/Balance')) {
+        if (request.nextUrl.pathname.startsWith('/Balance') || request.nextUrl.pathname.startsWith('/Affiliate')|| request.nextUrl.pathname.startsWith('/Leaderboard')) {
             return NextResponse.redirect(new URL('/Login', request.url));
         }
     }

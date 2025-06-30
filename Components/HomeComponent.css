@@ -10,16 +10,18 @@
     padding-top: 10px;
 }
 
-.HomePageContainer .section-one .Landing-Heading h1{
+.HomePageContainer .section-one .Landing-Heading h1 {
     font-size: 40px;
     font-weight: 700;
     line-height: 50px;
 }
-.HomePageContainer .section-one .Landing-Heading p{
+
+.HomePageContainer .section-one .Landing-Heading p {
     font-size: 20px;
     width: 80%;
     margin: 5px 0px;
 }
+
 .HomePageContainer .section-one a {
     width: 157px;
     display: flex;
@@ -146,6 +148,11 @@
     overflow: hidden;
     align-items: center;
     display: flex;
+}
+
+.HomePageContainer .Note {
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 @media (max-width:840px) {

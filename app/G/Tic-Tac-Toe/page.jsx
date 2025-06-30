@@ -1,3 +1,4 @@
+import Head from '@/app/AdsenseMetaTags';
 import TictactoeComponent from '@/Components/Games/TictactoeComponent'
 import React from 'react'
 export const metadata = {
@@ -6,6 +7,7 @@ export const metadata = {
 export default function page() {
     return (
         <div>
+            <Head />
             <TictactoeComponent />
         </div>
     )

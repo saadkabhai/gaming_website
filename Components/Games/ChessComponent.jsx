@@ -133,8 +133,6 @@ export default function ChessComponent() {
                     width = container?.clientWidth,
                     height = container?.clientHeight,
                     shortestvalue = height < width ? height : width
-                    console.log(shortestvalue);
-                    
                 board.style.opacity = 0
                 board.style.width = `${shortestvalue}px`
                 board.style.height = `${shortestvalue - 0.2}px`
@@ -178,9 +176,18 @@ export default function ChessComponent() {
                     </div>
                 </div>
             </div>
-            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30,fontWeight:700 }}>Chess</h1>
+            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30, fontWeight: 700 }}>Chess</h1>
             <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
                 Challenge your mind with a classic game of Chess. Play against friends or sharpen your strategy solo — no downloads or registration needed!
+            </p>
+            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
+                Chess is one of the oldest and most popular strategy board games in the world. Played by millions across the globe, it challenges players to think critically, plan ahead, and outwit their opponents.
+            </p>
+            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
+                Whether you are a beginner learning the rules or an experienced player honing your tactics, this chess game offers an enjoyable and intuitive experience. Our interactive board allows you to move pieces easily with drag-and-drop or touch controls.
+            </p>
+            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
+                Try to checkmate your opponent while defending your own king! You can also practice against the computer's random moves to improve your skills. Have fun and enjoy the timeless challenge of chess!
             </p>
             <div className="chess-container">
                 <div className="chessboard" onClick={() => {

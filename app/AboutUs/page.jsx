@@ -1,14 +1,13 @@
-import GamesComponent from '@/Components/GamesComponent'
+import AboutUsComponent from '@/Components/AboutUsComponent'
 import React from 'react'
 import Head from '../AdsenseMetaTags';
 export const metadata = {
-  title: "Games"
+    title: "About Us"
 };
 export default function page() {
   return (
     <div>
       <Head />
-      <GamesComponent/>
-    </div>
+      <AboutUsComponent/></div>
   )
 }

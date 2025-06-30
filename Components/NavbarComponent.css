@@ -355,13 +355,13 @@
 
 }
 
-@media (max-width:1170px) {
+@media (max-width:1284px) {
     .navbar {
         padding: 5px 10px;
     }
 }
 
-@media (max-width:1005px) {
+@media (max-width:1043px) {
     .navbar .links {
         display: none;
     }

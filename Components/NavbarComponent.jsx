@@ -199,18 +199,40 @@ export default function NavbarComponent(data) {
                             <div className="slash"></div>
                         </ViewLink>
                     </div>
-                    <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
-                        <ViewLink href={'/Affiliate'}>
-                            <p>Affiliate</p>
-                            <div className="slash"></div>
-                        </ViewLink>
-                    </div>
-                    <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
-                        <ViewLink href={'/Leaderboard'}>
-                            <p>Leaderboard</p>
-                            <div className="slash"></div>
-                        </ViewLink>
-                    </div>
+                    {CSRisloaggedIn == false ? (
+                        data.Status == 'LoggedIn' ? (
+                            <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
+                                <ViewLink href={'/Affiliate'}>
+                                    <p>Affiliate</p>
+                                    <div className="slash"></div>
+                                </ViewLink>
+                            </div>
+                        ) : ''
+                    ) : isloaggedIn ? (
+                        <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
+                            <ViewLink href={'/Affiliate'}>
+                                <p>Affiliate</p>
+                                <div className="slash"></div>
+                            </ViewLink>
+                        </div>
+                    ) : ''}
+                    {CSRisloaggedIn == false ? (
+                        data.Status == 'LoggedIn' ? (
+                            <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
+                                <ViewLink href={'/Leaderboard'}>
+                                    <p>Leaderboard</p>
+                                    <div className="slash"></div>
+                                </ViewLink>
+                            </div>
+                        ) : ''
+                    ) : isloaggedIn ? (
+                        <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
+                            <ViewLink href={'/Leaderboard'}>
+                                <p>Leaderboard</p>
+                                <div className="slash"></div>
+                            </ViewLink>
+                        </div>
+                    ) : ''}
                     <div className={`link ${pathname == '/Help' ? 'active' : ''}`}>
                         <ViewLink href={'/Help'}>
                             <p>Help</p>
@@ -226,6 +248,12 @@ export default function NavbarComponent(data) {
                     <div className={`link ${pathname == '/ContactUs' ? 'active' : ''}`}>
                         <ViewLink href={'/ContactUs'}>
                             <p>Contact Us</p>
+                            <div className="slash"></div>
+                        </ViewLink>
+                    </div>
+                    <div className={`link ${pathname == '/AboutUs' ? 'active' : ''}`}>
+                        <ViewLink href={'/AboutUs'}>
+                            <p>About Us</p>
                             <div className="slash"></div>
                         </ViewLink>
                     </div>
@@ -295,29 +323,55 @@ export default function NavbarComponent(data) {
                                 <p className='linktext'>Games</p>
                             </ViewLink>
                         </div>
-                        <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
-                            <ViewLink href={'/Affiliate'}>
-                                <p className='linktext'>Affiliate</p>
-                            </ViewLink>
-                        </div>
-                        <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
-                            <ViewLink href={'/Leaderboard'}>
-                                <p className='linktext'>Leaderboard</p>
-                            </ViewLink>
-                        </div>
+                        {CSRisloaggedIn == false ? (
+                            data.Status == 'LoggedIn' ? (
+                                <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
+                                    <ViewLink href={'/Affiliate'}>
+                                        <p className='linktext'>Affiliate</p>
+                                    </ViewLink>
+                                </div>
+                            ) : ''
+                        ) : isloaggedIn ? (
+                            <div className={`link ${pathname == '/Affiliate' ? 'active' : ''}`}>
+                                <ViewLink href={'/Affiliate'}>
+                                    <p className='linktext'>Affiliate</p>
+                                </ViewLink>
+                            </div>
+                        ) : ''}
+                        {CSRisloaggedIn == false ? (
+                            data.Status == 'LoggedIn' ? (
+                                <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
+                                    <ViewLink href={'/Leaderboard'}>
+                                        <p className='linktext'>Leaderboard</p>
+                                    </ViewLink>
+                                </div>
+                            ) : ''
+                        ) : isloaggedIn ? (
+                            <div className={`link ${pathname == '/Leaderboard' ? 'active' : ''}`}>
+                                <ViewLink href={'/Leaderboard'}>
+                                    <p className='linktext'>Leaderboard</p>
+                                </ViewLink>
+                            </div>
+                        ) : ''}
+
                         <div className={`link ${pathname == '/Help' ? 'active' : ''}`}>
                             <ViewLink href={'/Help'}>
                                 <p className='linktext'>Help</p>
                             </ViewLink>
                         </div>
-                        <div className={`link ${pathname == '/PrivacyPolicy' ? 'active' : ''}`} style={{marginBottom:5}}>
+                        <div className={`link ${pathname == '/PrivacyPolicy' ? 'active' : ''}`} style={{ marginBottom: 5 }}>
                             <ViewLink href={'/PrivacyPolicy'}>
                                 <p className='linktext'>Privacy Policy</p>
                             </ViewLink>
                         </div>
-                        <div className={`link ${pathname == '/ContactUs' ? 'active' : ''}`} style={{marginBottom:5}}>
-                            <ViewLink href={'/PrivacyPolicy'}>
+                        <div className={`link ${pathname == '/ContactUs' ? 'active' : ''}`} style={{ marginBottom: 5 }}>
+                            <ViewLink href={'/ContactUs'}>
                                 <p className='linktext'>Contact Us</p>
+                            </ViewLink>
+                        </div>
+                        <div className={`link ${pathname == '/AboutUs' ? 'active' : ''}`} style={{ marginBottom: 5 }}>
+                            <ViewLink href={'/AboutUs'}>
+                                <p className='linktext'>About Us</p>
                             </ViewLink>
                         </div>
                         {CSRisloaggedIn == false ? (

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /CP
+Disallow: /Login
+Disallow: /SignUp
+Disallow: /OTP
+Disallow: /FPE
