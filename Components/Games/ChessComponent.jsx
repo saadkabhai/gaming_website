@@ -126,7 +126,6 @@ export default function ChessComponent() {
         setlegalmoves(null);
     };
     const scaleboard = () => {
-        setTimeout(() => {
             const container = document.querySelector('.chess-container')
             if (container) {
                 const board = document.querySelector('.chessboard'),
@@ -138,7 +137,6 @@ export default function ChessComponent() {
                 const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
                 setPieceSize(piece_width)
             }
-        }, 6000);
     }
     useEffect(() => {
         scaleboard()
