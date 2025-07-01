@@ -10,7 +10,7 @@ const BASEURL = [
 // ];
 
 const ServerURL = BASEURL[Math.floor(Math.random() * BASEURL.length)];
-// const WebsiteURL = 'https://www.play2win.cc';
-const WebsiteURL = 'http://localhost:3000';
+const WebsiteURL = 'https://www.play2win.cc';
+// const WebsiteURL = 'http://localhost:3000';
 
 export { ServerURL, WebsiteURL };
