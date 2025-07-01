@@ -129,7 +129,7 @@ export default function ChessComponent() {
             const container = document.querySelector('.chess-container')
             if (container) {
                 const board = document.querySelector('.chessboard'),
-                    width = container?.clientWidth - 100,
+                    width = container?.clientWidth,
                     height = container?.clientHeight - 100,
                     shortestvalue = height < width ? height : width
                 board.style.width = `${shortestvalue}px`

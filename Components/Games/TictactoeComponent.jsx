@@ -167,7 +167,7 @@ export default function TictactoeComponent() {
         const container = document.querySelector('.tictactoe-board-container')
         if (container) {
             const board = document.querySelector('.tictactoe-board'),
-                width = container?.clientWidth - 100,
+                width = container?.clientWidth,
                 height = container?.clientHeight - 100,
                 shortestvalue = height < width ? height : width
             board.style.width = `${shortestvalue - 20}px`
