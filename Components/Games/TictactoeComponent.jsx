@@ -164,21 +164,15 @@ export default function TictactoeComponent() {
     }
 
     const scaleboard = () => {
-        setTimeout(() => {
-            const container = document.querySelector('.tictactoe-board-container')
-            if (container) {
-                const board = document.querySelector('.tictactoe-board'),
-                    width = container?.clientWidth,
-                    height = container?.clientHeight,
-                    shortestvalue = height < width ? height : width
-                board.style.opacity = 0
-                board.style.width = `${shortestvalue - 20}px`
-                board.style.height = `${shortestvalue - 20}px`
-                setTimeout(() => {
-                    board.style.opacity = 1
-                }, 500);
-            }
-        }, 500);
+        const container = document.querySelector('.tictactoe-board-container')
+        if (container) {
+            const board = document.querySelector('.tictactoe-board'),
+                width = container?.clientWidth - 100,
+                height = container?.clientHeight - 100,
+                shortestvalue = height < width ? height : width
+            board.style.width = `${shortestvalue - 20}px`
+            board.style.height = `${shortestvalue - 20}px`
+        }
     }
     useEffect(() => {
         scaleboard()
@@ -210,20 +204,23 @@ export default function TictactoeComponent() {
                     </div>
                 </div>
             </div>
-            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30, fontWeight: 700 }}>Tic Tac Toe</h1>
-            <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
-                Enjoy a fun and classic game of Tic Tac Toe. Compete against a friend or test your skills solo — simple, fast, and no sign-up needed!
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
-                Tic Tac Toe is a classic and simple strategy game that has entertained players for generations. It’s a great way to sharpen your tactical thinking and have fun in quick, competitive rounds.
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
-                Play against the computer or a friend and see who can get three marks in a row first. This version offers a clean, user-friendly interface and fast gameplay without any distractions or sign-up required.
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
-                Whether you're passing time or practicing strategic moves, enjoy this timeless game right in your browser on any device. Good luck and have fun!
-            </p>
+            <div className="Text">
+                <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30, fontWeight: 700 }}>Tic Tac Toe</h1>
+                <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
+                    Enjoy a fun and classic game of Tic Tac Toe. Compete against a friend or test your skills solo — simple, fast, and no sign-up needed!
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Tic Tac Toe is a classic and simple strategy game that has entertained players for generations. It’s a great way to sharpen your tactical thinking and have fun in quick, competitive rounds.
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Play against the computer or a friend and see who can get three marks in a row first. This version offers a clean, user-friendly interface and fast gameplay without any distractions or sign-up required.
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Whether you're passing time or practicing strategic moves, enjoy this timeless game right in your browser on any device. Good luck and have fun!
+                </p>
+            </div>
             <div className="tictactoe-board-container">
+                <div className="Ad"></div>
                 <div className="tictactoe-board">
                     <div className="lines-container">
                         <div className="line line1"></div>

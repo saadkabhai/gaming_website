@@ -6,7 +6,7 @@ import LayeredButton from './LayeredButton'
 import { usePathname, useRouter } from 'next/navigation'
 import secureStorage from './secureStorage'
 import EncryptText from './encryptText'
-import { ServerURL } from './BASEURL'
+import { WebsiteURL } from './BASEURL'
 
 export default function SignUpComponent() {
     const [showPassword, setshowPassword] = useState(false)
@@ -20,23 +20,6 @@ export default function SignUpComponent() {
     const isStrongPassword = (password) => {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()._+=-])[A-Za-z\d!@#$%^&*()._+=-]{8,}$/;
         return regex.test(password);
-    };
-    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-    const fetchWithRetry = async (url, options, delay = 1000) => {
-        while (true) {
-            try {
-                const response = await fetch(url, options);
-                if (response.status >= 500) {
-                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
-                } else {
-                    return await response.json();
-                }
-            } catch (err) {
-                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
-            }
-            await wait(delay);
-        }
     };
     const SendRegisterRequest = async () => {
         setbuttonisloading(true)
@@ -67,7 +50,7 @@ export default function SignUpComponent() {
             should_request = false
         }
         if (should_request == true) {
-            const res = await fetchWithRetry(`${ServerURL}/UserRegister`, {
+            const response = await fetch(`${WebsiteURL}/api/UserRegister`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -79,6 +62,7 @@ export default function SignUpComponent() {
                     Ref: ref
                 })
             })
+            const res = await response.json()
             if (res.message == 'Username is already taken.') {
                 error_text.innerHTML = '<b>Hey</b>, Username is already taken.'
                 error_container.classList.add('active')
@@ -105,8 +89,8 @@ export default function SignUpComponent() {
         error_container.classList.remove('active')
     }
     useEffect(() => {
-        const parts = pathname.split('/'); // ['', 'SignUp', 's']
-        const lastSegment = parts[parts.length - 1]; // 's'
+        const parts = pathname.split('/');
+        const lastSegment = parts[parts.length - 1];
         if (lastSegment !== 'SignUp') {
             const ref = secureStorage.get('ref')
             if (!ref) {

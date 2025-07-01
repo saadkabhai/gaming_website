@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react'
 import './GamesComponent.css'
 import ViewLink from './ViewLink';
-import ServerURL from './BASEURL';
 export default function GamesComponent() {
   const isSingleLine = (element) => {
     const style = window.getComputedStyle(element);

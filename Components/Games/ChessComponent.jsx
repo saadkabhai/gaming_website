@@ -126,23 +126,17 @@ export default function ChessComponent() {
         setlegalmoves(null);
     };
     const scaleboard = () => {
-        setTimeout(() => {
-            const container = document.querySelector('.chess-container')
-            if (container) {
-                const board = document.querySelector('.chessboard'),
-                    width = container?.clientWidth,
-                    height = container?.clientHeight,
-                    shortestvalue = height < width ? height : width
-                board.style.opacity = 0
-                board.style.width = `${shortestvalue}px`
-                board.style.height = `${shortestvalue - 0.2}px`
-                setTimeout(() => {
-                    const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
-                    setPieceSize(piece_width)
-                    board.style.opacity = 1
-                }, 500);
-            }
-        }, 500);
+        const container = document.querySelector('.chess-container')
+        if (container) {
+            const board = document.querySelector('.chessboard'),
+                width = container?.clientWidth - 100,
+                height = container?.clientHeight - 100,
+                shortestvalue = height < width ? height : width
+            board.style.width = `${shortestvalue}px`
+            board.style.height = `${shortestvalue - 0.2}px`
+            const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
+            setPieceSize(piece_width)
+        }
     }
     useEffect(() => {
         scaleboard()
@@ -176,20 +170,23 @@ export default function ChessComponent() {
                     </div>
                 </div>
             </div>
-            <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30, fontWeight: 700 }}>Chess</h1>
-            <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
-                Challenge your mind with a classic game of Chess. Play against friends or sharpen your strategy solo — no downloads or registration needed!
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
-                Chess is one of the oldest and most popular strategy board games in the world. Played by millions across the globe, it challenges players to think critically, plan ahead, and outwit their opponents.
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
-                Whether you are a beginner learning the rules or an experienced player honing your tactics, this chess game offers an enjoyable and intuitive experience. Our interactive board allows you to move pieces easily with drag-and-drop or touch controls.
-            </p>
-            <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5}}>
-                Try to checkmate your opponent while defending your own king! You can also practice against the computer's random moves to improve your skills. Have fun and enjoy the timeless challenge of chess!
-            </p>
+            <div className="Text">
+                <h1 className="game-heading" style={{ textAlign: 'center', fontSize: 30, fontWeight: 700 }}>Chess</h1>
+                <p className="game-description" style={{ textAlign: 'center', fontSize: 18 }}>
+                    Challenge your mind with a classic game of Chess. Play against friends or sharpen your strategy solo — no downloads or registration needed!
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Chess is one of the oldest and most popular strategy board games in the world. Played by millions across the globe, it challenges players to think critically, plan ahead, and outwit their opponents.
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Whether you are a beginner learning the rules or an experienced player honing your tactics, this chess game offers an enjoyable and intuitive experience. Our interactive board allows you to move pieces easily with drag-and-drop or touch controls.
+                </p>
+                <p className="game-info" style={{ maxWidth: '90%', margin: '2px auto', fontSize: 16, lineHeight: 1.5 }}>
+                    Try to checkmate your opponent while defending your own king! You can also practice against the computer's random moves to improve your skills. Have fun and enjoy the timeless challenge of chess!
+                </p>
+            </div>
             <div className="chess-container">
+                <div className="Ad"></div>
                 <div className="chessboard" onClick={() => {
                     if (GameOver) {
                         const result_container = document.querySelector('.result-container'),

@@ -4,7 +4,7 @@ import './SignUpComponent.css'
 import LayeredButton from './LayeredButton'
 import secureStorage from './secureStorage'
 import { useRouter } from 'next/navigation'
-import { ServerURL } from './BASEURL'
+import {  WebsiteURL } from './BASEURL'
 
 export default function LoginComponent() {
     const [buttonisloading, setbuttonisloading] = useState(false)
@@ -12,23 +12,6 @@ export default function LoginComponent() {
     const isValidEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
-    };
-    const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-    const fetchWithRetry = async (url, options, delay = 1000) => {
-        while (true) {
-            try {
-                const response = await fetch(url, options);
-                if (response.status >= 500) {
-                    console.warn(`⚠️ Server error (${response.status}). Retrying in ${delay}ms...`);
-                } else {
-                    return await response.json();
-                }
-            } catch (err) {
-                console.warn(`❌ Fetch failed: ${err.message}. Retrying in ${delay}ms...`);
-            }
-            await wait(delay);
-        }
     };
     const sendrequestofForgotPassword = async () => {
         setbuttonisloading(true)
@@ -47,7 +30,7 @@ export default function LoginComponent() {
             should_request = false
         }
         if (should_request == true) {
-            const res = await fetchWithRetry(`${ServerURL}/ForgotPassword`, {
+            const response = await fetch(`${WebsiteURL}/api/ForgotPassword`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,6 +39,7 @@ export default function LoginComponent() {
                     Email: email.value
                 })
             })
+            const res = await response.json()
             if (res.message == 'The email you entered is not associated with any account.') {
                 error_container.classList.add('active')
                 error_text.innerHTML = '<b>Hey</b>, The email you entered is not associated with any account.'

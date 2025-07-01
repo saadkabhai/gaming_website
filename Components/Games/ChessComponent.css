@@ -1,10 +1,9 @@
 .chess-game-container {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px);
   padding: 0;
   flex-direction: column;
-  /* overflow: hidden; */
 }
 
 .chess-game-container .result-container {
@@ -93,11 +92,17 @@
 }
 
 .chess-container {
-  flex: 1;
-  display: flex;
-  max-width: 100vw;
-  justify-content: start;
+  min-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
   overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chess-container .Ad {
+  height: 100px;
 }
 
 .chess-container .chessboard {
@@ -105,12 +110,11 @@
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  aspect-ratio: 1 / 1;
+  height: 280px;
+  width: 280px;
   opacity: 1;
   gap: 0px;
-  transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 
 .square {
   display: flex;
