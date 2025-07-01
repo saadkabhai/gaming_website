@@ -174,7 +174,7 @@ export default function TictactoeComponent() {
                 board.style.width = `${shortestvalue - 20}px`
                 board.style.height = `${shortestvalue - 20}px`
             }
-        }, 5000);
+        }, 6000);
     }
     useEffect(() => {
         scaleboard()
