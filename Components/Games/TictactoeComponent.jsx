@@ -164,15 +164,17 @@ export default function TictactoeComponent() {
     }
 
     const scaleboard = () => {
-        const container = document.querySelector('.tictactoe-board-container')
-        if (container) {
-            const board = document.querySelector('.tictactoe-board'),
-                width = container?.clientWidth - 100,
-                height = container?.clientHeight - 100,
-                shortestvalue = height < width ? height : width
-            board.style.width = `${shortestvalue - 20}px`
-            board.style.height = `${shortestvalue - 20}px`
-        }
+        setTimeout(() => {
+            const container = document.querySelector('.tictactoe-board-container')
+            if (container) {
+                const board = document.querySelector('.tictactoe-board'),
+                    width = container?.clientWidth - 100,
+                    height = container?.clientHeight - 100,
+                    shortestvalue = height < width ? height : width
+                board.style.width = `${shortestvalue - 20}px`
+                board.style.height = `${shortestvalue - 20}px`
+            }
+        }, 100);
     }
     useEffect(() => {
         scaleboard()

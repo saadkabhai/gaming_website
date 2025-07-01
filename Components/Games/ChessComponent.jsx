@@ -126,21 +126,23 @@ export default function ChessComponent() {
         setlegalmoves(null);
     };
     const scaleboard = () => {
-        const container = document.querySelector('.chess-container')
-        if (container) {
-            const board = document.querySelector('.chessboard'),
-                width = container?.clientWidth - 100,
-                height = container?.clientHeight - 100,
-                shortestvalue = height < width ? height : width
-            board.style.width = `${shortestvalue}px`
-            board.style.height = `${shortestvalue - 0.2}px`
-            const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
-            setPieceSize(piece_width)
-        }
+        setTimeout(() => {
+            const container = document.querySelector('.chess-container')
+            if (container) {
+                const board = document.querySelector('.chessboard'),
+                    width = container?.clientWidth - 100,
+                    height = container?.clientHeight - 100,
+                    shortestvalue = height < width ? height : width
+                board.style.width = `${shortestvalue}px`
+                board.style.height = `${shortestvalue - 0.2}px`
+                const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
+                setPieceSize(piece_width)
+            }
+        }, 100);
     }
     useEffect(() => {
-        // scaleboard()
-        // window.addEventListener('resize', scaleboard);
+        scaleboard()
+        window.addEventListener('resize', scaleboard);
     }, [])
     return (
         <div className="chess-game-container" style={{ cursor: draggedPiece && 'not-allowed' }}>
