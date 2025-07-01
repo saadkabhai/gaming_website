@@ -225,6 +225,7 @@ export default function ChessComponent() {
                                             onTouchMove={handlePointerhMove}
                                             onPointerDown={(e) => handlePointerStart(e, rowIndex, colIndex)}
                                             src={pieceClasses[piece]}
+                                            alt={pieceClasses[piece]}
                                             className={`chess-peice ${piece.startsWith('w') ? 'white-piece' : 'black-piece'}`} />
                                     )}
                                 </div>
