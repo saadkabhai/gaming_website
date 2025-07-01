@@ -138,7 +138,7 @@ export default function ChessComponent() {
                 const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
                 setPieceSize(piece_width)
             }
-        }, 100);
+        }, 500);
     }
     useEffect(() => {
         scaleboard()
