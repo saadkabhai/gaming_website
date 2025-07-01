@@ -139,8 +139,8 @@ export default function ChessComponent() {
         }
     }
     useEffect(() => {
-        scaleboard()
-        window.addEventListener('resize', scaleboard);
+        // scaleboard()
+        // window.addEventListener('resize', scaleboard);
     }, [])
     return (
         <div className="chess-game-container" style={{ cursor: draggedPiece && 'not-allowed' }}>
