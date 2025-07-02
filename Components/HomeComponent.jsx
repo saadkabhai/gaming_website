@@ -36,10 +36,6 @@ export default function HomeComponent(ServerData) {
         })
     }
     useEffect(() => {
-        const size = document.querySelector('.size')
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        size.innerHTML = `${width}x${height}`
         adjustfontsize()
         window.addEventListener('resize', adjustfontsize);
     }, [])
@@ -137,7 +133,6 @@ export default function HomeComponent(ServerData) {
                     <p style={{ fontSize: 18, marginTop: 10 }}>Play2Win is accessible on any device with an internet connection — no downloads or registration are required to start playing. We aim to create an inclusive environment that welcomes gamers of all skill levels to join, compete, and grow.</p>
                     <p style={{ fontSize: 18, marginTop: 10 }}>We are committed to maintaining a safe and transparent platform. We follow strict policies to ensure fair play, protect user data, and provide a secure gaming experience. You can learn more about our rules and privacy practices on our Help and Privacy Policy pages.</p>
                     <p style={{ fontSize: 18, marginTop: 10 }}>Join Play2Win today, improve your skills, earn points, and compete for exciting monthly cash prizes. Become part of a growing community where every move counts and your skill truly pays off.</p>
-                    <p className='size'></p>
                 </div>
             </div>
         </div>
