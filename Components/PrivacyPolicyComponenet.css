@@ -1,0 +1,73 @@
+.PrivacyPolicy-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.PrivacyPolicy-container .Heading {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.PrivacyPolicy-container .Heading i {
+    font-size: 35px;
+
+}
+
+.PrivacyPolicy-container .date,
+.PrivacyPolicy-container .Description {
+    text-align: center;
+}
+
+.PrivacyPolicy-container .date {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.PrivacyPolicy-container .Description {
+    font-size: 18px;
+    margin-top: 10px;
+    max-width: 700px;
+    text-align: center;
+}
+
+.PrivacyPolicy-container .Policies {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.PrivacyPolicy-container .Policies .Policy {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.PrivacyPolicy-container .Policies .Policy .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.PrivacyPolicy-container .Policies .Policy h2 {
+    font-size: 20px;
+}
+
+.PrivacyPolicy-container .Policies .Policy p {
+    font-size: 18px;
+    max-width: 1000px;
+}
+
+.PrivacyPolicy-container a {
+    color: #185abc;
+}
+
+.PrivacyPolicy-container a:hover {
+    text-decoration: underline;
+}
