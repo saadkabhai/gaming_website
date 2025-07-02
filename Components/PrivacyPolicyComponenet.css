@@ -47,6 +47,8 @@
 .PrivacyPolicy-container .Policies .Policy .icon {
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 20px;
     border: 2px solid black;
     display: flex;
