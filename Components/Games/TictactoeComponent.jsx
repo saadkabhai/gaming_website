@@ -175,6 +175,14 @@ export default function TictactoeComponent() {
         }
     }
     useEffect(() => {
+        setTimeout(() => {
+            const distanceFromTop = document.querySelector('.Ad').getBoundingClientRect().top + window.pageYOffset - 0;
+            window.scrollTo({
+                top: distanceFromTop,
+                behavior: 'smooth'
+            });
+
+        }, 500);
         scaleboard()
         window.addEventListener('resize', scaleboard);
     }, [])
