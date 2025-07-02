@@ -8,7 +8,8 @@ async function Top3Players() {
   return Top3players.Top3
 }
 export const metadata = {
-  title: "Home"
+  title: "Play2Win - Free Skill-Based Gaming Platform",
+  description: "Play2Win is a free gaming platform where players compete in skill-based games to earn rewards. Top 3 players win cash prizes every month!"
 };
 export default async function Home() {
   const getTop3Players = await Top3Players()

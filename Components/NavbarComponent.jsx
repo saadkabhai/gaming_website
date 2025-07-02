@@ -6,6 +6,7 @@ import ViewLink from './ViewLink'
 import { useAuth } from './authContext'
 import secureStorage from './secureStorage'
 import { WebsiteURL } from './BASEURL'
+import EncryptText from './encryptText'
 export default function NavbarComponent(data) {
     const { isLoggedIn, setIsLoggedIn, PointsToAdd, setPointsToAdd } = useAuth(),
         [isloaggedIn, setisloaggedIn] = useState(false),
@@ -82,7 +83,8 @@ export default function NavbarComponent(data) {
         try {
             const response = await fetch(`${WebsiteURL}/api/getStatus`),
                 res = await response.json(),
-                Status = res.Status
+                EncryptedStatus = res.Status,
+                Status = EncryptText.get(EncryptedStatus)
             if (Status == 'LoggedIn') {
                 const UsernameResponse = await fetch(`${WebsiteURL}/api/getUsername`),
                     resUsername = await UsernameResponse.json(),
@@ -90,12 +92,15 @@ export default function NavbarComponent(data) {
                     resEmail = await EmailResponse.json(),
                     ColorResponse = await fetch(`${WebsiteURL}/api/getColor`),
                     resColor = await ColorResponse.json(),
-                    getUsername = resUsername.Username,
-                    getEmail = resEmail.Email,
-                    getColor = resColor.Color
-                setUsername(getUsername)
-                setColor(getColor)
-                setEmail(getEmail)
+                    getEncryptedUsername = resUsername.Username,
+                    getEncryptedEmail = resEmail.Email,
+                    getEncryptedColor = resColor.Color,
+                    DecryptedUsername = EncryptText.get(getEncryptedUsername),
+                    DecryptedEmail = EncryptText.get(getEncryptedEmail),
+                    DecrytedColor = EncryptText.get(getEncryptedColor)
+                setUsername(DecryptedUsername)
+                setEmail(DecryptedEmail)
+                setColor(DecrytedColor)
                 setisloaggedIn(true);
                 fetchPoints()
                 if (document.startViewTransition) {
@@ -121,7 +126,13 @@ export default function NavbarComponent(data) {
         User_panel.classList.remove('active')
         setTimeout(async () => {
             setIsLoggedIn(false)
-            await fetch(`${WebsiteURL}/api/setcookie?status=None`);
+            await fetch(`${WebsiteURL}/api/setcookie`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: 'None' })
+            });
             router.refresh()
             setCSRisloaggedIn(true)
             setisloaggedIn(false);
@@ -147,7 +158,27 @@ export default function NavbarComponent(data) {
         });
         fetchPoints()
     }
+    const setcookie = async () => {
+        await fetch(`${WebsiteURL}/api/setcookie`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'None' })
+        });
+        secureStorage.set('Loginmessage', '<b>Hey</b>, Password changed. Please log in again.')
+        if (document.startViewTransition) {
+            document.startViewTransition(() => {
+                router.push('/Login');
+            });
+        } else {
+            router.push('/Login');
+        }
+    }
     useEffect(() => {
+        if (data.Status == 'PasswordChange') {
+            setcookie()
+        }
         const Gems = document.querySelector('.User-panel .Gems')
         if (Gems) {
             autoResizeFont(Gems, 1, 20)

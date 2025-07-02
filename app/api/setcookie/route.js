@@ -1,39 +1,42 @@
+import { WebsiteURL } from '@/Components/BASEURL';
 import EncryptText from '@/Components/encryptText';
 import { NextResponse } from 'next/server';
+const allowedOrigin = WebsiteURL; // or your frontend domain
 
-export function GET(request) {
-    const url = new URL(request.url);
-    const status = url.searchParams.get('status');
-    const Username = url.searchParams.get('Username');
-    const Email = url.searchParams.get('Email');
-    const Color = url.searchParams.get('Color');
-    const response = NextResponse.json({ message: 'Cookies have been set!' });
-    if (status) {
-        const encryptedStatus = EncryptText.set(status)
-        response.headers.append(
-            'Set-Cookie',
-            `status=${encryptedStatus}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 365 * 10}`
-        );
-    } if (Username) {
-        const encryptedUsername = EncryptText.set(Username)
-        response.headers.append(
-            'Set-Cookie',
-            `Username=${encryptedUsername}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 365 * 10}`
-        );
-    }
-    if (Email) {
-        const encryptedEmail = EncryptText.set(Email)
-        response.headers.append(
-            'Set-Cookie',
-            `Email=${encryptedEmail}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 365 * 10}`
-        );
-    }
-    if (Color) {
-     const encryptedColor = EncryptText.set(Color)
-        response.headers.append(
-            'Set-Cookie',
-            `Color=${encryptedColor}; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=${60 * 60 * 24 * 365 * 10}`
-        );   
-    }
+export async function OPTIONS() {
+    return new Response(null, {
+        status: 204,
+        headers: {
+            'Access-Control-Allow-Origin': allowedOrigin,
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Credentials': 'true',
+        },
+    });
+}
+export async function POST(request) {
+    const { Email, status, Username, Color, Password } = await request.json();
+    const response = new NextResponse(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: {
+            'Access-Control-Allow-Origin': allowedOrigin,
+            'Access-Control-Allow-Credentials': 'true',
+        },
+    });
+    const setCookie = (key, value) => {
+        const encrypted = EncryptText.set(value);
+        response.cookies.set(key, encrypted, {
+            path: '/',
+            httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24 * 365 * 10,
+        });
+    };
+    if (status) setCookie('status', status);
+    if (Username) setCookie('Username', Username);
+    if (Email) setCookie('Email', Email);
+    if (Color) setCookie('Color', Color);
+    if (Password) setCookie('Password', Password);
     return response;
 }

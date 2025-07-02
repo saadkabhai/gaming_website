@@ -27,13 +27,46 @@ async function fetchPoints(Email) {
     User = await Pointsres.json()
   return User
 }
+async function GetStatus(status, Password, Email) {
+
+  if (status == 'LoggedIn') {
+    const response = await fetch(`${WebsiteURL}/api/GetUserPassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        Email: Email
+      })
+    })
+    const res = await response.json()
+    if (EncryptText.get(res.Password) == Password) {
+      return 'LoggedIn'
+    } else {
+      await fetch(`${WebsiteURL}/api/setcookie`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ status: 'None' })
+      });
+      return 'PasswordChange'
+    }
+
+  } else {
+    return 'None'
+  }
+}
 export default async function RootLayout({ children }) {
   const cookieStore = cookies();
   const Username = EncryptText.get(cookieStore.get('Username')?.value || null);
   const status = EncryptText.get(cookieStore.get('status')?.value || null);
   const Email = EncryptText.get(cookieStore.get('Email')?.value || null);
   const Color = EncryptText.get(cookieStore.get('Color')?.value || null);
+  const Password = EncryptText.get(cookieStore.get('Password')?.value || null)
   const Points = await fetchPoints(Email)
+  const getstatus = await GetStatus(status, Password, Email)
   return (
     <AuthProvider>
       <html lang="en">
@@ -73,7 +106,7 @@ export default async function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <NavbarComponent Status={status} Username={Username} Email={Email} Color={Color} Points={Points} />
+          <NavbarComponent Status={getstatus} Username={Username} Email={Email} Color={Color} Points={Points} />
           <main>
             {children}
           </main>

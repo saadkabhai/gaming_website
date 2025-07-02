@@ -1,11 +1,9 @@
 'use client'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './ChessComponent.css'
 import { Chess } from 'chess.js';
 import ViewLink from '../ViewLink';
-import secureStorage from '../secureStorage';
 import { useAuth } from '../authContext';
-import { WebsiteURL } from '../BASEURL';
 
 export default function ChessComponent() {
     const game = useRef(new Chess());
@@ -118,25 +116,23 @@ export default function ChessComponent() {
                     alert('Invalid move!');
                 }
             } catch (error) {
-                console.log(error);
-
             }
         }
         setdraggedPiece(null);
         setlegalmoves(null);
     };
     const scaleboard = () => {
-            const container = document.querySelector('.chess-container')
-            if (container) {
-                const board = document.querySelector('.chessboard'),
-                    width = container?.clientWidth,
-                    height = container?.clientHeight - 100,
-                    shortestvalue = height < width ? height : width
-                board.style.width = `${shortestvalue}px`
-                board.style.height = `${shortestvalue - 0.2}px`
-                const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
-                setPieceSize(piece_width)
-            }
+        const container = document.querySelector('.chess-container')
+        if (container) {
+            const board = document.querySelector('.chessboard'),
+                width = container?.clientWidth,
+                height = container?.clientHeight - 100,
+                shortestvalue = height < width ? height : width
+            board.style.width = `${shortestvalue}px`
+            board.style.height = `${shortestvalue - 0.2}px`
+            const piece_width = 90 / 100 * (shortestvalue / 8 - 0.4)
+            setPieceSize(piece_width)
+        }
     }
     useEffect(() => {
         scaleboard()

@@ -6,7 +6,7 @@ import LayeredButton from './LayeredButton'
 import secureStorage from './secureStorage'
 import { useRouter } from 'next/navigation'
 import { useAuth } from './authContext'
-import {  WebsiteURL } from './BASEURL'
+import { WebsiteURL } from './BASEURL'
 
 export default function LoginComponent() {
     const [showPassword, setshowPassword] = useState(false)
@@ -75,13 +75,19 @@ export default function LoginComponent() {
             } else if (res.message == 'Successful.') {
                 secureStorage.set('Email', Email.value)
                 secureStorage.set('Color', res.Color)
-                const params = new URLSearchParams({
-                    status: 'LoggedIn',
-                    Username: res.Username,
-                    Email: Email.value,
-                    Color: res.Color
+                await fetch(`${WebsiteURL}/api/setcookie`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'LoggedIn',
+                        Username: res.Username,
+                        Email: Email.value,
+                        Color: res.Color,
+                        Password: Password.value
+                    })
                 });
-                await fetch(`${WebsiteURL}/api/setcookie?${params.toString()}`);
                 setIsLoggedIn(true);
                 return
             }
