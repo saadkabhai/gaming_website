@@ -17,5 +17,6 @@ export const config = {
         '/Balance/:path*',
         '/Affiliate/:path*',
         '/Leaderboard/:path*',
+        
     ],
 };
