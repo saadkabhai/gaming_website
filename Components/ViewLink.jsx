@@ -1,39 +1,10 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-export default function ViewLink({ href, children, delay, ...props }) {
-    const router = useRouter();
-
-    const handleClick = async (e) => {
-        e.preventDefault(); // Stop default navigation
-        if (delay) {
-            setTimeout(async () => {
-                if (document.startViewTransition) {
-                    const transition = document.startViewTransition(() => {
-                        router.push(href);
-                    });
-
-                    await transition.finished;
-                } else {
-                    router.push(href);
-                }
-            }, delay);
-        } else {
-            if (document.startViewTransition) {
-                const transition = document.startViewTransition(() => {
-                    router.push(href);
-                });
-
-                await transition.finished;
-            } else {
-                router.push(href);
-            }
-        }
-    };
-
+export default function ViewLink({ href, children, ...props }) {
     return (
-        <a href={href} onClick={handleClick} {...props}>
+        <Link href={href} prefetch={false} {...props}>
             {children}
-        </a>
+        </Link>
     );
 }
