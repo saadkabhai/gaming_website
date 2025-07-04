@@ -114,7 +114,7 @@ export default function SignUpComponent() {
             </div>
             <div className="form">
                 <div className="logo">
-                    <img src="/logo.png" alt="" />
+                    <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/logo.png" alt="" />
                     <div className="name">PLAY2WIN</div>
                 </div>
                 <div className="inputs">

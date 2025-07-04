@@ -11,7 +11,7 @@ export default function notfound() {
                 ERROR
             </div>
             <div className="image">
-                <img src="/not_found.png" alt="" />
+                <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/not_found.png" alt="" />
             </div>
             <div className="error-text" style={{marginTop:10}}>
                 PAGE NOT FOUND

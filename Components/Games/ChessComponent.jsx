@@ -228,7 +228,7 @@ export default function ChessComponent() {
                                             onTouchStart={(e) => handlePointerStart(e, rowIndex, colIndex)}
                                             onTouchMove={handlePointerhMove}
                                             onPointerDown={(e) => handlePointerStart(e, rowIndex, colIndex)}
-                                            src={pieceClasses[piece]}
+                                            src={`https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public${pieceClasses[piece]}`}
                                             alt={pieceClasses[piece]}
                                             className={`chess-peice ${piece.startsWith('w') ? 'white-piece' : 'black-piece'}`} />
                                     )}

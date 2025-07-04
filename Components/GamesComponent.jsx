@@ -58,7 +58,7 @@ export default function GamesComponent() {
           observer.observe(game);
         }}>
           <div className="image">
-            <img src="/Gameschess.png" alt="Chess game thumbnail" />
+            <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/Gameschess.png" alt="Chess game thumbnail" />
           </div>
           <div className="name">Chess</div>
         </ViewLink>
@@ -77,7 +77,7 @@ export default function GamesComponent() {
           observer.observe(game);
         }}>
           <div className="image">
-            <img src="/Gamestic-tac.png" alt="Tic Tac Toe game thumbnail" />
+            <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/Gamestic-tac.png" alt="Tic Tac Toe game thumbnail" />
           </div>
           <div className="name">Tic-Tac-Toe</div>
         </ViewLink>

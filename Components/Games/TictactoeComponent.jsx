@@ -32,7 +32,7 @@ export default function TictactoeComponent() {
         const img = document.createElement('img');
         img.style.transition = '0.5s cubic-bezier(0.4, 0, 0.2, 1)';
         img.style.transform = 'scale(0)';
-        img.src = `/cross.png`;
+        img.src = `https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/cross.png`;
         e.target.appendChild(img);
         setTimeout(() => {
             img.style.transform = 'scale(1)';
@@ -86,7 +86,7 @@ export default function TictactoeComponent() {
             const img = document.createElement('img');
             img.style.transition = '0.5s cubic-bezier(0.4, 0, 0.2, 1)';
             img.style.transform = 'scale(0)';
-            img.src = `/Circle.png`;
+            img.src = `https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/Circle.png`;
             cells[randomIndex].append(img)
             setTimeout(() => {
                 img.style.transform = 'scale(1)';

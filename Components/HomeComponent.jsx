@@ -71,7 +71,7 @@ export default function HomeComponent(ServerData) {
 
                             observer.observe(game);
                         }}>
-                            <img src="/Homechess.png" alt="Chess game thumbnail" />
+                            <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/Homechess.png" alt="Chess game thumbnail" />
                             <div className="name">Chess</div>
                         </ViewLink>
                         <ViewLink href={'/G/Tic-Tac-Toe'} className="Game active" ref={(game) => {
@@ -88,7 +88,7 @@ export default function HomeComponent(ServerData) {
 
                             observer.observe(game);
                         }}>
-                            <img src="/Hometictac.png" alt="Tic Tac Toe game thumbnail" />
+                            <img src="https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/Hometictac.png" alt="Tic Tac Toe game thumbnail" />
                             <div className="name">Tic-Tac-Toe</div>
                         </ViewLink>
                     </div>
