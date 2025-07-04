@@ -53,13 +53,12 @@ export default async function RootLayout({ children }) {
   const Email = EncryptText.get(cookieStore.get('Email')?.value || null);
   const Color = EncryptText.get(cookieStore.get('Color')?.value || null);
   const Password = EncryptText.get(cookieStore.get('Password')?.value || null)
-  let Points
+  let Points = 0
   const getstatus = await GetStatus(status, Password, Email)
   const pathname = headersList.get('x-pathname')
   console.log(pathname);
   if (pathname !== null && getstatus.status !== 'LoggedIn') {
-    redirect('/Login'); // ✅ Redirect if not logged in
-    
+    redirect('/Login');
   }
   if (getstatus.status == 'LoggedIn') {
     Points = getstatus.Points
