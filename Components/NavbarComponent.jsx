@@ -430,7 +430,7 @@ export default function NavbarComponent(data) {
                         <div className="email">{Email ? Email : data.Email}</div>
                         <div className="Gems">
                             <img src="/Gems.png" alt="" />
-                            <p className="score">{formatToShortNumber(CSRPoints == false ? data.Points.Points : Points)}</p>
+                            <p className="score">{formatToShortNumber(CSRPoints == false ? data.Points : Points)}</p>
                         </div>
                         <div style={{ backgroundColor: Color ? Color : data.Color }} className="profile-avatar">{Username ? Username[0].toUpperCase() : data.Username[0].toUpperCase()}</div>
                         <div className="Username">Hi, {Username ? Username : data.Username}</div>

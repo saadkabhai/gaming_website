@@ -22,13 +22,7 @@ export const metadata = {
     icon: "/favicon.ico",
   },
 };
-async function fetchPoints(Email) {
-  const Pointsres = await fetch(`${WebsiteURL}/api/getPoints?Email=${Email}`),
-    User = await Pointsres.json()
-  return User
-}
 async function GetStatus(status, Password, Email) {
-
   if (status == 'LoggedIn') {
     const response = await fetch(`${WebsiteURL}/api/GetUserPassword`, {
       method: 'POST',
@@ -36,26 +30,18 @@ async function GetStatus(status, Password, Email) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        Email: Email
+        Email: Email,
+        Password: Password
       })
     })
     const res = await response.json()
-    if (EncryptText.get(res.Password) == Password) {
-      return 'LoggedIn'
-    } else {
-      await fetch(`${WebsiteURL}/api/setcookie`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({ status: 'None' })
-      });
-      return 'PasswordChange'
+    if (res.message == 'Correct Password') {
+      return { status: 'LoggedIn', Points: res.Points };
+    } else if (res.message = 'Incorrect Password') {
+      return { status: 'None' };
     }
-
   } else {
-    return 'None'
+    return { status: 'None' };
   }
 }
 export default async function RootLayout({ children }) {
@@ -65,8 +51,12 @@ export default async function RootLayout({ children }) {
   const Email = EncryptText.get(cookieStore.get('Email')?.value || null);
   const Color = EncryptText.get(cookieStore.get('Color')?.value || null);
   const Password = EncryptText.get(cookieStore.get('Password')?.value || null)
-  const Points = await fetchPoints(Email)
+  let Points
   const getstatus = await GetStatus(status, Password, Email)
+  if (getstatus.status == 'LoggedIn') {
+    Points = getstatus.Points
+  }
+
   return (
     <AuthProvider>
       <html lang="en">
@@ -106,7 +96,7 @@ export default async function RootLayout({ children }) {
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <NavbarComponent Status={getstatus} Username={Username} Email={Email} Color={Color} Points={Points} />
+          <NavbarComponent Status={getstatus.status} Username={Username} Email={Email} Color={Color} Points={Points} />
           <main>
             {children}
           </main>
