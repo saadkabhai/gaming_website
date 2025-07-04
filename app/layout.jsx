@@ -3,8 +3,9 @@ import "./globals.css";
 import NavbarComponent from "@/Components/NavbarComponent";
 import { AuthProvider } from "@/Components/authContext";
 import { WebsiteURL } from "@/Components/BASEURL";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import EncryptText from "@/Components/encryptText";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ async function GetStatus(status, Password, Email) {
 }
 export default async function RootLayout({ children }) {
   const cookieStore = cookies();
+  const headersList = headers();
   const Username = EncryptText.get(cookieStore.get('Username')?.value || null);
   const status = EncryptText.get(cookieStore.get('status')?.value || null);
   const Email = EncryptText.get(cookieStore.get('Email')?.value || null);
@@ -53,6 +55,12 @@ export default async function RootLayout({ children }) {
   const Password = EncryptText.get(cookieStore.get('Password')?.value || null)
   let Points
   const getstatus = await GetStatus(status, Password, Email)
+  const pathname = headersList.get('x-pathname')
+  console.log(pathname);
+  if (pathname !== null && getstatus.status !== 'LoggedIn') {
+    redirect('/Login'); // ✅ Redirect if not logged in
+    
+  }
   if (getstatus.status == 'LoggedIn') {
     Points = getstatus.Points
   }

@@ -1,22 +1,14 @@
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import EncryptText from './Components/encryptText';
 
 export async function middleware(request) {
-    const cookieStore = cookies();
-    const status = EncryptText.get(cookieStore.get('status')?.value || null);
-    if (status !== 'LoggedIn') {
-        if (request.nextUrl.pathname.startsWith('/Balance') || request.nextUrl.pathname.startsWith('/Affiliate') || request.nextUrl.pathname.startsWith('/Leaderboard')) {
-            return NextResponse.redirect(new URL('/Login', request.url));
-        }
-    }
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.headers.set('x-pathname', request.nextUrl.pathname); // 🔥 custom header
+    return response;
 }
 export const config = {
     matcher: [
         '/Balance/:path*',
         '/Affiliate/:path*',
         '/Leaderboard/:path*',
-        
     ],
 };
