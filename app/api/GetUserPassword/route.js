@@ -30,6 +30,18 @@ export async function POST(req) {
         });
     } else {
         const encrypted = EncryptText.set('None');
+        const response = new NextResponse(
+            JSON.stringify({
+                message: 'Incorrect Password',
+            }),
+            {
+                status: 200,
+                headers: {
+                    'Access-Control-Allow-Origin': allowedOrigin,
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
         response.cookies.set('status', encrypted, {
             path: '/',
             httpOnly: true,
@@ -37,14 +49,6 @@ export async function POST(req) {
             sameSite: 'strict',
             maxAge: 60 * 60 * 24 * 365 * 10,
         });
-        return new NextResponse(JSON.stringify({
-            message: 'Incorrect Password',
-        }), {
-            status: 200,
-            headers: {
-                'Access-Control-Allow-Origin': allowedOrigin,
-            },
-        });
-
+        return response;
     }
 }
