@@ -86,18 +86,10 @@ export default function NavbarComponent(data) {
                 EncryptedStatus = res.Status,
                 Status = EncryptText.get(EncryptedStatus)
             if (Status == 'LoggedIn') {
-                const UsernameResponse = await fetch(`${WebsiteURL}/api/getUsername`),
-                    resUsername = await UsernameResponse.json(),
-                    EmailResponse = await fetch(`${WebsiteURL}/api/getEmail`),
-                    resEmail = await EmailResponse.json(),
-                    ColorResponse = await fetch(`${WebsiteURL}/api/getColor`),
-                    resColor = await ColorResponse.json(),
-                    getEncryptedUsername = resUsername.Username,
-                    getEncryptedEmail = resEmail.Email,
-                    getEncryptedColor = resColor.Color,
-                    DecryptedUsername = EncryptText.get(getEncryptedUsername),
-                    DecryptedEmail = EncryptText.get(getEncryptedEmail),
-                    DecrytedColor = EncryptText.get(getEncryptedColor)
+                const Userinfo = await fetch(`${WebsiteURL}/api/getUserinfo`),
+                    DecryptedUsername = EncryptText.get(Userinfo.Username),
+                    DecryptedEmail = EncryptText.get(Userinfo.Email),
+                    DecrytedColor = EncryptText.get(Userinfo.Color)
                 setUsername(DecryptedUsername)
                 setEmail(DecryptedEmail)
                 setColor(DecrytedColor)
