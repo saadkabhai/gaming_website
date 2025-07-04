@@ -5,6 +5,8 @@ export const metadata = {
     title: "Contact Us"
 };
 
+export const revalidate = 86400;
+
 export default function page() {
     return (
         <div>

@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Loading...",
   icons: {
-    icon: "/favicon.ico",
+    icon: "https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/favicon.ico",
   },
 };
 async function GetStatus(status, Password, Email) {

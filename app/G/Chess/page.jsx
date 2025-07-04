@@ -4,6 +4,9 @@ import React from 'react'
 export const metadata = {
   title: "Chess"
 };
+
+export const revalidate = 86400;
+
 export default function page() {
     return (
         <div>

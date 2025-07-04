@@ -1,6 +1,7 @@
 import React from 'react'
 import './not-found.css'
 import ViewLink from '@/Components/ViewLink'
+export const revalidate = 86400;
 export default function notfound() {
     return (
         <div className='not-found-error-container'>

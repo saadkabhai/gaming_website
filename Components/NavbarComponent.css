@@ -28,7 +28,7 @@
 .navbar .logo .image {
     height: 60px;
     width: 60px;
-    background-image: url('/logo.png');
+    background-image: url('https://raw.githubusercontent.com/saadkabhai/gaming_website/0321813/public/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
